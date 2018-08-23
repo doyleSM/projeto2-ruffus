@@ -1,0 +1,3 @@
+*.log
+virtualenv/*
+manage.py
