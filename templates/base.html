@@ -27,7 +27,7 @@
     <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
         <ul class="navbar-nav ml-auto text-center">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Início</a>
+                <a class="nav-link" href="{% url 'index' %}">Início</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Serviços</a>
@@ -38,7 +38,7 @@
         </ul>
     </div>
     <div class="mx-auto my-2 order-0 order-md-1 position-relative">
-        <a class="mx-auto" href="#">
+        <a class="mx-auto" href="{% url 'index' %}">
             <img src="{% static 'img/logo.png' %}" width="80" height="80" class="rounded-circle logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
