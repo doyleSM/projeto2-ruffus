@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.
@@ -17,7 +18,11 @@ class Categoria(models.Model):
         ordering = ['nome']
 
     def __str__(self):
-        return  self.nome
+        return self.nome
+
+    def get_absolute_url(self):
+        return reverse('catalogo:lista_por_categoria', kwargs={'slug': self.slug})
+
 
 class Servico(models.Model):
 

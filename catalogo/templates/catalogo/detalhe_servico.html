@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block script %}
+<style>
+
+.landing {
+  height: 100vh;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+
+
+.page {
+  border-radius: 8px;
+  box-shadow: 0 9px 50px 4px rgba(0, 0, 0, 0.4);
+  background: white;
+  width: 80%;
+  height: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  overflow: hidden;
+}
+.page .image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: lightgray;
+  height: 100%;
+  width: 50%;
+}
+.page .image img {
+  width: 90%;
+}
+.page .about {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 25px;
+  max-width: 50%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.page .about .main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.page .about .main .title {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 28px;
+  padding: 16px 0 32px 0;
+  font-weight: 400;
+}
+.page .about .main .description p {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 400;
+  padding-bottom: 16px;
+}
+.page .about .controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.page .about .controls .try {
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 8px;
+  color: #f4f5f7;
+  background: #3f51b5;
+}
+
+@media only screen and (min-width: 1024px) {
+  .page {
+    max-width: 900px;
+    max-height: 700px;
+
+  }
+}
+@media only screen and (max-width: 480px) {
+  .landing {
+    background: #ecf0f1;
+  }
+
+
+
+  .page {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .page .image {
+    padding-top: 8px;
+    width: 100%;
+    height: 20%;
+  }
+  .page .image img {
+    height: 100%;
+    width: initial;
+  }
+  .page .about {
+    overflow-y: scroll;
+    max-width: 100%;
+  }
+}
+</style>
+{% endblock %}
+{% block container %}
+<div class="landing">
+  <div class="page">
+    <div class="image">
+      <img src="https://placeimg.com/640/480/any" />
+    </div>
+    <div class="about">
+      <div class="main">
+        <div class="title">
+          {{ servico }}
+        </div>
+        <div class="description">
+        {{ servico.descricao }}
+        </div>
+      </div>
+      <div class="controls">
+        <a href="#" target="">
+          <div class="try">
+            Solicitar Orçamento
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock container %}

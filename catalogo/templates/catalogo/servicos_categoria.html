@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block script %}
+<link href="{% static 'bootstrap/css/cards.css' %}" rel="stylesheet">
+    <style>
+        .my-header{
+            text-align: center;
+        }
+    section{
+        padding: 45px 0 !important;
+}
+    </style>
+{% endblock %}
+{% block container %}
+<section class="details-card">
+    <h1 class="my-header"> Serviços {{ categoria_atual }}</h1>
+    <div class="container">
+
+        <div class="row">
+            {% for servico in servicos %}
+                <div class="col-md-4">
+                    <div class="card-content">
+                        <div class="card-img">
+                            <a href="{% url 'catalogo:detalhe_servico' servico.slug %}">
+                                <img src="https://placeimg.com/380/230/animals" alt="">
+                            </a>
+                            <!--<span><h4>heading</h4></span> -->
+                        </div>
+                        <div class="card-desc">
+                            <h3>{{ servico.nome }}</h3>
+                            <p>{{ servico.descricao }}</p>
+                                <a href="{% url 'catalogo:detalhe_servico' servico.slug %}" class="btn-card">Read</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
