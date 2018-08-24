@@ -1,0 +1,92 @@
+<!DOCTYPE html> {% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Ruffus - Sua casa, nosso lar</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+  <link href="{% static 'bootstrap/css/nav-bar.css' %}" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark sidebarNavigation mynav" data-sidebarClass="navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'img/logo.png' %}" width="30" height="30" alt="">
+      </a>
+    <button class="navbar-toggler leftNavbarToggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="nav navbar-nav nav-flex-icons ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Início</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">Serviços</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Seja um profissional</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sobre nós</a>
+        </li>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button">Action</button>
+            <button class="dropdown-item" type="button">Another action</button>
+            <button class="dropdown-item" type="button">Something else here</button>
+          </div>
+        </div>
+        
+        </ul>
+
+    </div>
+</div>
+</nav>
+
+
+    {% block messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{message.tags}}">
+        {{ message }}
+     </div>
+      {% endfor %}
+    {% endblock messages %}
+    {% block container %}
+    {% endblock %}
+    
+
+  
+  
+      <!-- Bootstrap core JavaScript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+      
+    </body>
+  </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html> {% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Ruffus - Sua casa, nosso lar</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+  <link href="{% static 'bootstrap/css/nav-bar.css' %}" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  {% block script %}
+  {% endblock %}
+</head>
+
+<body style="background-color: #c6c6c6;">
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mynav">
+    <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
+        <ul class="navbar-nav ml-auto text-center">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Início</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Serviços</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Seja um profissional</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto my-2 order-0 order-md-1 position-relative">
+        <a class="mx-auto" href="#">
+            <img src="{% static 'img/logo.png' %}" width="80" height="80" class="rounded-circle logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
+        <ul class="navbar-nav mr-auto text-center">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Sobre nós</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Entrar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Cadastrar</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+    {% block messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{message.tags}}">
+        {{ message }}
+     </div>
+      {% endfor %}
+    {% endblock messages %}
+    {% block container %}
+    {% endblock %}
+    
+
+  
+  
+      <!-- Bootstrap core JavaScript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+      
+    </body>
+  </html>
