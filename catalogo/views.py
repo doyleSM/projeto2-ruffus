@@ -4,7 +4,6 @@
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from .models import Servico, Categoria
-from django.http import JsonResponse
 
 class ListaServicosView(generic.ListView):
     model = Servico
@@ -43,10 +42,3 @@ class DetalheServicoView(generic.ListView):
 
 detalhe_servico = DetalheServicoView.as_view()
 
-
-def get_categorias(request):
-    categorias = [
-        dict(id=categoria.id, nome=categoria.nome, data_cria=categoria.data_criacao, data_mod=categoria.data_modificacao)
-        for categoria in Categoria.objects.all()
-    ]
-    return JsonResponse(dict(categorias=categorias))
