@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{%  load static %}
+
+{% block script %}
+      <link href="{% static 'bootstrap/css/registro_cliente.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  {% endblock %}
+
+{% block container %}
+
+    <div  style="margin-top: 15px;">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+	        <h4 class="card-title mt-3 text-center">Cria uma conta</h4>
+	        <p class="text-center">Comece com sua conta gratuita</p>
+	        <p>
+		        <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login com Twitter</a>
+		        <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login com facebook</a>
+	        </p>
+	        <p class="divider-text">
+                <span class="bg-light">OU</span>
+            </p>
+	        <form method="post">
+                {% csrf_token %}
+                 <div class="form-group input-group">
+                     {{ form.username.errors }}
+		            <div class="input-group-prepend">
+		                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		            </div>
+                    {{ form.username }}
+                </div> <!-- form-group// -->
+	            <div class="form-group input-group">
+                    {{ form.first_name.errors }}
+		            <div class="input-group-prepend">
+		                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		            </div>
+                    {{ form.first_name }}
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                     {{ form.last_name.errors }}
+		            <div class="input-group-prepend">
+		                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		            </div>
+                    {{ form.last_name }}
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                         {{ form.email.errors }}
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                     </div>
+                    {{ form.email }}
+                </div> <!-- form-group// -->
+
+                <div class="form-group input-group">
+                     {{ form.password1.errors }}
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    {{ form.password1 }}
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                     {{ form.password2.errors }}
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    {{ form.password2 }}
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> Criar Conta  </button>
+                </div> <!-- form-group// -->
+                <p class="text-center">Have an account? <a href="">Log In</a> </p>
+            </form>
+        </article>
+    </div> <!-- card.// -->
+
+    <!--
+    <h2>Cadastro novo usuário</h2>
+    <form method='post'>
+        {% csrf_token %}
+        <fieldset>
+            {% for field in form %}
+                <div class="form-group {% if field.errors %} has-error{% endif %}">
+                    <label for="{{ field.auto_id }}" class="col-sm-6 sr-only"> {{field.label }}</label>
+                    <div class="">
+                        {% render_field field class="form-control form-control-sm" placeholder=field.label  %}
+                        {% for error in field.errors %}
+                            <span class="help-block"> {{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            <button class="btn btn-primary " type="submit">Cadastrar</button>
+        </fieldset>
+    </form>
+-->
+{% endblock %}
