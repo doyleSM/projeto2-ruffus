@@ -1,3 +1,6 @@
 *.log
 virtualenv/*
 *.sqlite3
+__pycache__
+.vscode
+.idea
