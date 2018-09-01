@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b3f1c84-a34f-428b-a107-3ee3aeb54c5c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usuarios/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/templates/usuarios/cadastro_prestador_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/usuarios/cadastro_prestador_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/usuarios/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+            <state relative-caret-position="395">
+              <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -66,6 +62,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/usuarios/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="cadastro_prestador_form.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/usuarios/templates/usuarios/cadastro_prestador_form.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -78,11 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/usuarios/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="89" selection-start-line="5" selection-start-column="89" selection-end-line="5" selection-end-column="89" />
+            <state relative-caret-position="120">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -127,15 +135,15 @@
         <option value="$PROJECT_DIR$/catalogo/urls.py" />
         <option value="$PROJECT_DIR$/usuarios/forms.py" />
         <option value="$PROJECT_DIR$/csite/static/bootstrap/css/registro_cliente.css" />
-        <option value="$PROJECT_DIR$/usuarios/admin.py" />
         <option value="$PROJECT_DIR$/usuarios/templates/usuarios/cadastro_cliente_form.html" />
         <option value="$PROJECT_DIR$/ruffus_core/settings.py" />
         <option value="$PROJECT_DIR$/ruffus_core/urls.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
-        <option value="$PROJECT_DIR$/usuarios/models.py" />
         <option value="$PROJECT_DIR$/usuarios/views.py" />
         <option value="$PROJECT_DIR$/usuarios/templates/usuarios/cadastro_prestador_form.html" />
         <option value="$PROJECT_DIR$/usuarios/urls.py" />
+        <option value="$PROJECT_DIR$/usuarios/admin.py" />
+        <option value="$PROJECT_DIR$/usuarios/models.py" />
       </list>
     </option>
   </component>
@@ -148,11 +156,11 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="111" />
-    <option name="y" value="35" />
-    <option name="width" value="1173" />
-    <option name="height" value="623" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="86" />
+    <option name="y" value="58" />
+    <option name="width" value="1165" />
+    <option name="height" value="628" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -170,12 +178,6 @@
               <item name="Projeto2" type="b2602c69:ProjectViewProjectNode" />
               <item name="Projeto2" type="462c0819:PsiDirectoryNode" />
               <item name="usuarios" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Projeto2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Projeto2" type="462c0819:PsiDirectoryNode" />
-              <item name="usuarios" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -247,7 +249,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-2" width="1368" height="735" extended-state="6" />
+    <frame x="86" y="58" width="1165" height="628" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32881355" />
@@ -257,7 +259,7 @@
       <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49924013" weight="0.32881355" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49772036" weight="0.3542373" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19908814" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23539983" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -557,16 +559,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/usuarios/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ruffus_core/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -588,16 +580,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="532">
           <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/usuarios/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -640,10 +622,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/usuarios/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="89" selection-start-line="5" selection-start-column="89" selection-end-line="5" selection-end-column="89" />
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usuarios/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usuarios/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>

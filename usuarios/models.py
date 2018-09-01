@@ -32,3 +32,7 @@ class Prestador(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    class Meta:
+        verbose_name_plural = 'Prestadores'
+        verbose_name = 'Prestador'
