@@ -14,8 +14,8 @@
 	        <h4 class="card-title mt-3 text-center">Cria uma conta</h4>
 	        <p class="text-center">Comece com sua conta gratuita</p>
 	        <p>
-		        <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login com Twitter</a>
-		        <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login com facebook</a>
+		        <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Entrar com Twitter</a>
+		        <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Entrar com facebook</a>
 	        </p>
 	        <p class="divider-text">
                 <span class="bg-light">OU</span>
@@ -27,28 +27,29 @@
 		            <div class="input-group-prepend">
 		                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 		            </div>
-                    {{ form.username }}
+                    {% render_field form.username class="form-control" placeholder='Username' %}
                 </div> <!-- form-group// -->
 	            <div class="form-group input-group">
+                    <p class="help-block"><small>{{ form.first_name.errors }}</small></p>
                     {{ form.first_name.errors }}
 		            <div class="input-group-prepend">
 		                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 		            </div>
-                    {{ form.first_name }}
+                    {% render_field form.first_name class="form-control" placeholder='Nome' %}
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                      {{ form.last_name.errors }}
 		            <div class="input-group-prepend">
 		                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 		            </div>
-                    {{ form.last_name }}
+                    {% render_field form.last_name class="form-control" placeholder='Sobrenome' %}
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                          {{ form.email.errors }}
                         <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                      </div>
-                    {{ form.email }}
+                     {% render_field form.email class="form-control" placeholder='Email' %}
                 </div> <!-- form-group// -->
 
                 <div class="form-group input-group">
@@ -56,19 +57,23 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    {{ form.password1 }}
+                    {% render_field form.password1 class="form-control" placeholder='Senha' %}
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
-                     {{ form.password2.errors }}
+                    {% if form.password2.errors %}
+                    <div class="alert alert-warning">
+                        {{ form.password2.errors }}
+                    </div>
+                    {% endif %}
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    {{ form.password2 }}
+                    {% render_field form.password2 class="form-control" placeholder='Confirmação de senha' %}
                 </div> <!-- form-group// -->
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block"> Criar Conta  </button>
                 </div> <!-- form-group// -->
-                <p class="text-center">Have an account? <a href="">Log In</a> </p>
+                <p class="text-center">Já possui uma conta? <a href="">Entrar</a> </p>
             </form>
         </article>
     </div> <!-- card.// -->
