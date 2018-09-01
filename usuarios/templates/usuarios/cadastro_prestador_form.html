@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{%  load static %}
+
+{% block script %}
+      <link href="{% static 'bootstrap/css/registro_cliente.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  {% endblock %}
+
+{% block container %}
+
+    <div  style="margin-top: 15px;">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+	        <h4 class="card-title mt-3 text-center">Cria uma conta</h4>
+	        <p class="text-center">Comece com sua conta gratuita</p>
+	        <p>
+		        <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Entrar com Twitter</a>
+		        <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Entrar com facebook</a>
+	        </p>
+	        <p class="divider-text">
+                <span class="bg-light">OU</span>
+            </p>
+        <h2>Cadastro Novo Prestador</h2>
+	        <form method="post">
+                {% csrf_token %}
+                 <div class="form-group input-group">
+                     {{ form.username.errors }}
+		            <div class="input-group-prepend">
+		                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		            </div>
+                    {% render_field form.username class="form-control" placeholder='Username' %}
+                </div> <!-- form-group// -->
+	            <div class="form-group input-group">
+                    <p class="help-block"><small>{{ form.first_name.errors }}</small></p>
+                    {{ form.first_name.errors }}
+		            <div class="input-group-prepend">
+		                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		            </div>
+                    {% render_field form.first_name class="form-control" placeholder='Nome' %}
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                     {{ form.last_name.errors }}
+		            <div class="input-group-prepend">
+		                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		            </div>
+                    {% render_field form.last_name class="form-control" placeholder='Sobrenome' %}
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                         {{ form.email.errors }}
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                     </div>
+                     {% render_field form.email class="form-control" placeholder='Email' %}
+                </div> <!-- form-group// -->
+
+                <div class="form-group input-group">
+                     {{ form.password1.errors }}
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    {% render_field form.password1 class="form-control" placeholder='Senha' %}
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    {% if form.password2.errors %}
+                    <div class="alert alert-warning">
+                        {{ form.password2.errors }}
+                    </div>
+                    {% endif %}
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    {% render_field form.password2 class="form-control" placeholder='Confirmação de senha' %}
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> Criar Conta  </button>
+                </div> <!-- form-group// -->
+                <p class="text-center">Já possui uma conta? <a href="">Entrar</a> </p>
+            </form>
+        </article>
+    </div> <!-- card.// -->
+{% endblock %}

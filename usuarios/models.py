@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from catalogo.models import Categoria
 
 class User(AbstractUser):
     is_cliente = models.BooleanField(default=False)
@@ -19,6 +20,7 @@ class Endereco(models.Model):
 class Cliente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     CPF = models.CharField('CPF', max_length=15, default='123456789')
+    #categorias = models.ManyToManyField(Categoria, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
@@ -26,6 +28,7 @@ class Cliente(models.Model):
 class Prestador(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     CPF = models.CharField('CPF', max_length=15, default='12345678')
+
 
     def __str__(self):
         return self.user.username

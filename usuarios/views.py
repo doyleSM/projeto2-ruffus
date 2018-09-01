@@ -43,7 +43,12 @@ class PrestadorCadastroView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('cadastro_prestador')
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        messages.warning(self.request, 'Prestador cadastrado com sucesso, aguarde análise')
+        return reverse('index')
+
 
 @method_decorator(login_required, name='dispatch')
 class EnderecoView(CreateView):
