@@ -13,28 +13,33 @@ class ClienteAdmin(admin.ModelAdmin):
         return obj.user.username
 
     def status(self, obj):
-        if(obj.user.is_active):
+        if obj.user.is_active:
             return 'Ativo'
         return 'Inativo'
 
     def endereco(self, obj):
         usuario = User.objects.get(pk=obj.user.pk)
-        endereco = Endereco.objects.get(usuario=usuario)
+        enderecos = Endereco.objects.filter(usuario=usuario)
+        endereco = ''
+        for end in enderecos:
+            endereco += end.nome_rua + ' - '
         return endereco
+
 
 class EnderecoAdmin(admin.ModelAdmin):
     list_display = ['nome_rua', 'complemento', 'bairro', 'CEP', 'usuario']
     search_fields = ['nome_rua',]
     autocomplete_fields = ('usuario',)
-    
+
+
 class UserAdmin(admin.ModelAdmin):
     search_fields = ['nome',]
 
 
 class PrestadorAdmin(admin.ModelAdmin):
-    fields = [('CPF', 'user'), ]
+    fields = [('CPF', 'user'), 'categorias' ]
     list_display = ['usuario', 'nome', 'CPF', 'status', 'endereco']
-    search_fields = ['nome',]
+    search_fields = ['nome']
 
     def nome(self, obj):
         return obj.user.first_name + ' ' + obj.user.last_name
@@ -49,7 +54,10 @@ class PrestadorAdmin(admin.ModelAdmin):
 
     def endereco(self, obj):
         usuario = User.objects.get(pk=obj.user.pk)
-        endereco = Endereco.objects.get(usuario=usuario)
+        enderecos = Endereco.objects.filter(usuario=usuario)
+        endereco = ''
+        for end in enderecos:
+            endereco += end.nome_rua + ' - '
         return endereco
 
 

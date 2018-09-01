@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{%  load static %}
+
+{% block script %}
+      <link href="{% static 'bootstrap/css/registro_cliente.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  {% endblock %}
+
+
+{% block container %}
+  <h2 class="mb-3">Escolha as categorias que você deseja trabalhar</h2>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Salvar</button>
+  </form>
+
+{% endblock %}
+<div>
+    <h2>Escolha as categorias que você deseja trabalhar</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group input-group">
+            {{ form.username.errors }}
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            {% render_field form.username class="form-control" placeholder='Username' %}
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block"> Criar Conta  </button>
+            </div> <!-- form-group// -->
+            <p class="text-center">Já possui uma conta? <a href="">Entrar</a> </p>
+        </div>
+    </form>
+    </div> <!-- card.// -->

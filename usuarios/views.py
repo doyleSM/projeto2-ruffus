@@ -1,12 +1,12 @@
 from django.contrib.auth import login
-from django.shortcuts import redirect, render_to_response
-from django.views.generic import CreateView
+from django.shortcuts import redirect
+from django.views.generic import CreateView, UpdateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from .forms import ClienteCadastroForm, PrestadorCadastroForm, EnderecoForm
-from .models import User, Endereco
+from .forms import ClienteCadastroForm, PrestadorCadastroForm, EnderecoForm, PrestadorCategoriasForm
+from .models import User, Endereco, Prestador
 from django.contrib import messages
-from django.urls import  reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth import logout
 
 
@@ -65,3 +65,17 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'Desconectado com sucesso!')
     return redirect('index')
+
+
+class PrestadorCategoriasView(UpdateView):
+    model = Prestador
+    form_class = PrestadorCategoriasForm
+    template_name = 'usuarios/prestador_categorias_form.html'
+    success_url = reverse_lazy('index')
+
+    def get_object(self):
+        return self.request.user.prestador
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Categorias atualizadas com sucesso!')
+        return super().form_valid(form)

@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, CheckboxSelectMultiple
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from usuarios.models import Cliente, Endereco, User, Prestador
@@ -33,6 +33,17 @@ class PrestadorCadastroForm(UserCreationForm):
         user.save()
         Prestador.objects.create(user=user)
         return user
+
+
+class PrestadorCategoriasForm(ModelForm):
+    class Meta:
+        model = Prestador
+        fields = ('categorias', )
+        widgets = {
+            'categorias': CheckboxSelectMultiple
+        }
+
+
 
 class EnderecoForm(ModelForm):
 
