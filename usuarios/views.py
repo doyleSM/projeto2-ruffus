@@ -1,4 +1,5 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, REDIRECT_FIELD_NAME
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect
 from django.views.generic import CreateView, UpdateView
 from django.utils.decorators import method_decorator
@@ -8,6 +9,7 @@ from .models import User, Endereco, Prestador
 from django.contrib import messages
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import logout
+from django.contrib.auth.views import LoginView
 
 
 class ClienteCadastroView(CreateView):
@@ -46,7 +48,7 @@ class PrestadorCadastroView(CreateView):
         return redirect(self.get_success_url())
 
     def get_success_url(self):
-        messages.warning(self.request, 'Prestador cadastrado com sucesso, aguarde análise')
+        messages.warning(self.request, 'Cadastro realizado com sucesso! Usuário aguardando análise')
         return reverse('index')
 
 
@@ -66,6 +68,18 @@ def logout_view(request):
     messages.success(request, 'Desconectado com sucesso!')
     return redirect('index')
 
+
+class Login(LoginView):
+
+    form_class = AuthenticationForm
+    authentication_form = None
+    #redirect_field_name = REDIRECT_FIELD_NAME
+    template_name = 'usuarios/login.html'
+    redirect_authenticated_user = 'index'
+
+    def get_success_url(self):
+        messages.success(self.request, 'Usuário logado')
+        return reverse('index')
 
 class PrestadorCategoriasView(UpdateView):
     model = Prestador
