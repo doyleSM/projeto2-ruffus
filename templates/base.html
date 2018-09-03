@@ -35,9 +35,11 @@
                       {% endfor %}
                   </div>
                 </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'usuarios:cadastro_prestador' %}">Seja um profissional</a>
-            </li>
+            {% if not user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'usuarios:cadastro_prestador' %}">Seja um profissional</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
     <div class="mx-auto my-2 order-0 order-md-1 position-relative">
@@ -57,7 +59,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">{{ user.username }}</a>
             </li>
-             <li class="nav-item">
+            <li class="nav-item align-right">
+                <a class="nav-link" href="{% url 'usuarios:cliente_conta' %}">Minha conta</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'usuarios:logout' %}">Sair</a>
             </li>
             {% else %}
