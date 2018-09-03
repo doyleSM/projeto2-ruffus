@@ -42,3 +42,4 @@ class DetalheServicoView(generic.ListView):
 
 detalhe_servico = DetalheServicoView.as_view()
 
+

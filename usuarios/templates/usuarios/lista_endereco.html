@@ -1,0 +1,14 @@
+{% extends 'usuarios/minha_conta_cliente.html' %}
+{% load widget_tweaks %}
+
+{% block conta %}
+
+{% for endereco in enderecos %}
+
+    {{ endereco.nome_rua }}
+
+{% endfor %}
+    <div style="padding-top: 50px">
+        <a href="{% url 'usuarios:cadastro_endereco' %}"><button class="btn btn-primary">Cadastrar novo endereço</button></a>
+    </div>
+{% endblock %}

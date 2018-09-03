@@ -1,7 +1,7 @@
 from django.contrib.auth import login, REDIRECT_FIELD_NAME
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.shortcuts import redirect
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, TemplateView, FormView, ListView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .forms import ClienteCadastroForm, PrestadorCadastroForm, EnderecoForm, PrestadorCategoriasForm
@@ -52,17 +52,6 @@ class PrestadorCadastroView(CreateView):
         return reverse('index')
 
 
-@method_decorator(login_required, name='dispatch')
-class EnderecoView(CreateView):
-    model = Endereco
-    form_class = EnderecoForm
-    template_name = 'usuarios/cadastro_endereco_form.html'
-
-    def form_valid(self, form):
-        form.instance.usuario = self.request.user
-        return super(EnderecoView, self).form_valid(form)
-
-
 def logout_view(request):
     logout(request)
     messages.success(request, 'Desconectado com sucesso!')
@@ -81,6 +70,7 @@ class Login(LoginView):
         messages.success(self.request, 'Usuário logado')
         return reverse('index')
 
+
 class PrestadorCategoriasView(UpdateView):
     model = Prestador
     form_class = PrestadorCategoriasForm
@@ -93,3 +83,57 @@ class PrestadorCategoriasView(UpdateView):
     def form_valid(self, form):
         messages.success(self.request, 'Categorias atualizadas com sucesso!')
         return super().form_valid(form)
+
+
+class MinhaContaClienteView(TemplateView):
+    template_name = 'usuarios/minha_conta_cliente.html'
+
+
+class AlterarSenhaView(FormView):
+    template_name = 'usuarios/alterar_senha.html'
+    #success_url = reverse_lazy('usuarios:cliente_conta')
+    form_class = PasswordChangeForm
+
+    def get_form_kwargs(self):
+        kwargs = super(AlterarSenhaView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        messages.success(self.request, 'Senha alterada com sucesso!')
+        return reverse('usuarios:cliente_conta')
+
+
+class EnderecoView(CreateView):
+    model = Endereco
+    form_class = EnderecoForm
+    template_name = 'usuarios/cadastro_endereco.html'
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        form.save()
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        messages.success(self.request, 'Endereco cadastrado com sucesso')
+        return reverse('usuarios:lista_enderecos')
+
+
+class EnderecoListView(ListView):
+    template_name = 'usuarios/lista_endereco.html'
+    context_object_name = 'enderecos'
+
+    #paginate_by = 5
+
+    def get_queryset(self):
+        return Endereco.objects.filter(usuario=self.request.user)
+
+    #def get_context_data(self, **kwargs):
+    #    context = super(CategoriaListView, self).get_context_data(**kwargs)
+    #    context['categoria_atual'] = get_object_or_404(Categoria, slug=self.kwargs['slug'])
+    #    return context
