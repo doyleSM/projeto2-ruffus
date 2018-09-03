@@ -13,15 +13,14 @@ from django.contrib.auth.views import LoginView
 
 
 class ClienteCadastroView(CreateView):
+
     model = User
     form_class = ClienteCadastroForm
     template_name = 'usuarios/cadastro_cliente_form.html'
 
-
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'cliente'
         return super().get_context_data(**kwargs)
-
 
     def form_valid(self, form):
         user = form.save()
@@ -34,6 +33,7 @@ class ClienteCadastroView(CreateView):
 
 
 class PrestadorCadastroView(CreateView):
+
     model = User
     form_class = PrestadorCadastroForm
     template_name = 'usuarios/cadastro_prestador_form.html'
@@ -72,6 +72,7 @@ class Login(LoginView):
 
 
 class PrestadorCategoriasView(UpdateView):
+
     model = Prestador
     form_class = PrestadorCategoriasForm
     template_name = 'usuarios/prestador_categorias_form.html'
@@ -86,10 +87,12 @@ class PrestadorCategoriasView(UpdateView):
 
 
 class MinhaContaClienteView(TemplateView):
+
     template_name = 'usuarios/minha_conta_cliente.html'
 
 
 class AlterarSenhaView(FormView):
+
     template_name = 'usuarios/alterar_senha.html'
     #success_url = reverse_lazy('usuarios:cliente_conta')
     form_class = PasswordChangeForm
@@ -110,6 +113,7 @@ class AlterarSenhaView(FormView):
 
 
 class EnderecoView(CreateView):
+
     model = Endereco
     form_class = EnderecoForm
     template_name = 'usuarios/cadastro_endereco.html'
@@ -125,6 +129,7 @@ class EnderecoView(CreateView):
 
 
 class EnderecoListView(ListView):
+
     template_name = 'usuarios/lista_endereco.html'
     context_object_name = 'enderecos'
 
@@ -135,6 +140,7 @@ class EnderecoListView(ListView):
 
 
 class EnderecoEditar(UpdateView):
+
     model = Endereco
     form_class = EnderecoForm
     template_name = 'usuarios/cadastro_endereco.html'
@@ -154,6 +160,7 @@ class EnderecoEditar(UpdateView):
 
 
 class EnderecoDeletar(DeleteView):
+
     template_name_suffix = '_confirma_exclusao'
     model = Endereco
 

@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from usuarios.models import Cliente, Endereco, User, Prestador
 
-class ClienteCadastroForm(UserCreationForm):
 
+class ClienteCadastroForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -18,8 +18,8 @@ class ClienteCadastroForm(UserCreationForm):
         Cliente.objects.create(user=user)
         return user
 
-class PrestadorCadastroForm(UserCreationForm):
 
+class PrestadorCadastroForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -42,7 +42,6 @@ class PrestadorCategoriasForm(ModelForm):
         widgets = {
             'categorias': CheckboxSelectMultiple
         }
-
 
 
 class EnderecoForm(ModelForm):
