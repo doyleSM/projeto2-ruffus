@@ -1,0 +1,28 @@
+{% extends 'usuarios/minha_conta_cliente.html' %}
+{% load widget_tweaks %}
+
+{% block conta %}
+
+
+    <h3 class="pull-right mb-4">Atualizar endereço</h3>
+    <form class="form-horizontal" method='post' style="padding-top: 80px">
+        {% csrf_token %}
+        <fieldset>
+            {% for field in form %}
+                <div class="form-group {% if field.errors %} has-error{% endif %}">
+                    <label for="{{ field.auto_id }}" class="col-sm-6 sr-only"> {{field.label }}</label>
+                    <div class="">
+                        {% render_field field class="form-control" placeholder=field.label  %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <span class="help-block"> {{ error }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            <button class="btn btn-success align-right" type="submit">Alterar</button>
+        </fieldset>
+    </form>
+
+{% endblock %}

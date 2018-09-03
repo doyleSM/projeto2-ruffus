@@ -1,0 +1,15 @@
+
+{% extends 'usuarios/minha_conta_cliente.html' %}
+{% load widget_tweaks %}
+
+{% block conta %}
+
+
+    <h3 class="pull-right mb-4">Excluir endereço</h3>
+<form method="post" style="padding-top: 80px">{% csrf_token %}
+    <div class="alert alert-warning">
+        <p>Você tem certeza que quer apagar <strong>"{{ object }}</strong>"?</p>
+    </div>
+    <button class="btn btn-danger align-right" type="submit">Sim, apagar</button>
+</form>
+{% endblock %}

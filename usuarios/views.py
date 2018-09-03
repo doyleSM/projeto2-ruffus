@@ -1,7 +1,7 @@
 from django.contrib.auth import login, REDIRECT_FIELD_NAME
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from django.shortcuts import redirect
-from django.views.generic import CreateView, UpdateView, TemplateView, FormView, ListView
+from django.shortcuts import redirect, get_object_or_404
+from django.views.generic import CreateView, UpdateView, TemplateView, FormView, ListView, DeleteView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .forms import ClienteCadastroForm, PrestadorCadastroForm, EnderecoForm, PrestadorCategoriasForm
@@ -133,7 +133,33 @@ class EnderecoListView(ListView):
     def get_queryset(self):
         return Endereco.objects.filter(usuario=self.request.user)
 
-    #def get_context_data(self, **kwargs):
-    #    context = super(CategoriaListView, self).get_context_data(**kwargs)
-    #    context['categoria_atual'] = get_object_or_404(Categoria, slug=self.kwargs['slug'])
-    #    return context
+
+class EnderecoEditar(UpdateView):
+    model = Endereco
+    form_class = EnderecoForm
+    template_name = 'usuarios/cadastro_endereco.html'
+    success_url = reverse_lazy('usuarios:lista_enderecos')
+
+    def get_object(self):
+        #return Endereco.objects.get(pk=self.kwargs['pk'], usuario=self.request.user)
+        return get_object_or_404(Endereco, pk=self.kwargs['pk'], usuario=self.request.user)
+
+    def form_valid(self, form):
+        form.save()
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        messages.success(self.request, 'Endereco atualizado com sucesso')
+        return reverse('usuarios:lista_enderecos')
+
+
+class EnderecoDeletar(DeleteView):
+    template_name_suffix = '_confirma_exclusao'
+    model = Endereco
+
+    def get_object(self):
+        return get_object_or_404(Endereco, pk=self.kwargs['pk'], usuario=self.request.user)
+
+    def get_success_url(self):
+        messages.warning(self.request, 'Endereco removido com sucesso')
+        return reverse('usuarios:lista_enderecos')
