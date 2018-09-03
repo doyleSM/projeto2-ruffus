@@ -1,0 +1,44 @@
+{% extends 'usuarios/minha_conta_cliente.html' %}
+{% load widget_tweaks %}
+
+{% block conta %}
+    <div style="padding-bottom: 80px">
+        <h3 class="pull-right mb-4">Dados Pessoais</h3>
+    </div>
+    <div>
+    {% if not dados %}
+        <span id="notifications" class="form-text text-muted">
+            Parece que não há nada cadastrado
+        </span>
+    {% else %}
+        <div class="card" style="background-color: #5b80b2">
+            <div class="card-content" style="color: white;">
+            </div>
+            <div class="card-body bg-light">
+                <div>
+                     Nome Completo - {{ dados.user.get_full_name }}
+                </div>
+                <div>
+                    Nome de Usuário - {{ dados.user.username }}
+                </div>
+                <div>
+                   Email = {{ dados.user.email }}
+                </div>
+                <div>
+                    Ultimo login - {{ dados.user.last_login }}
+                </div>
+                <div>
+                    CPF - {{ dados.CPF }}
+                </div>
+
+            </div>
+        </div>
+        <div>
+            <a href="#"> <button class="btn btn-warning btn-sm" style="float: right; margin-right: 10px">Editar</button></a>
+        </div>
+    {% endif %}
+        <div style="padding-top: 50px; padding-bottom: 100px">
+            <a href="#"><button class="btn btn-info">Cadastrar novo endereço</button></a>
+        </div>
+    </div>
+{% endblock %}

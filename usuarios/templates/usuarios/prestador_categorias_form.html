@@ -1,20 +1,29 @@
-{% extends "base.html" %}
+{% extends 'usuarios/minha_conta_cliente.html' %}
 {% load widget_tweaks %}
-{%  load static %}
 
-{% block script %}
-      <link href="{% static 'bootstrap/css/registro_cliente.css' %}" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-  {% endblock %}
+{% block conta %}
 
+    <h3 class="pull-right mb-4">Categorias</h3>
+    <form class="form-horizontal" method='post' style="padding-top: 80px">
+        {% csrf_token %}
+        <fieldset>
+            <div class="row">
+                <label for="notifications"></label>
+                <span id="notifications" class="form-text text-muted">
+                    Escolha as categorias que você deseja trabalhar. Você só receberá e solicitações de orçamento
+                    nas categorias escolhidas aqui.
+                </span>
+                <div class="col-sm-6 my-4" style="margin: 5px">
+                    <div>
+                            {{ form }}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+                <button class="btn btn-success align-right" type="submit">Salvar</button>
 
-{% block container %}
-  <h2 class="mb-3">Escolha as categorias que você deseja trabalhar</h2>
-  <form method="post" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Salvar</button>
-  </form>
+    </form>
+
 
 {% endblock %}
 <div>
@@ -34,3 +43,4 @@
         </div>
     </form>
     </div> <!-- card.// -->
+

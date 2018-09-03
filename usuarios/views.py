@@ -5,7 +5,7 @@ from django.views.generic import CreateView, UpdateView, TemplateView, FormView,
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .forms import ClienteCadastroForm, PrestadorCadastroForm, EnderecoForm, PrestadorCategoriasForm
-from .models import User, Endereco, Prestador
+from .models import User, Endereco, Prestador, Cliente
 from django.contrib import messages
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import logout
@@ -75,7 +75,7 @@ class PrestadorCategoriasView(UpdateView):
     model = Prestador
     form_class = PrestadorCategoriasForm
     template_name = 'usuarios/prestador_categorias_form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('usuarios:cliente_conta')
 
     def get_object(self):
         return self.request.user.prestador
@@ -163,3 +163,15 @@ class EnderecoDeletar(DeleteView):
     def get_success_url(self):
         messages.warning(self.request, 'Endereco removido com sucesso')
         return reverse('usuarios:lista_enderecos')
+
+
+class DadosPessoaisList(ListView):
+    template_name = 'usuarios/dados_pessoais.html'
+    context_object_name = 'dados'
+
+    #paginate_by = 5
+
+    def get_queryset(self):
+        if self.request.user.is_prestador:
+            return Prestador.objects.get(user=self.request.user)
+        return Cliente.objects.get(user=self.request.user)

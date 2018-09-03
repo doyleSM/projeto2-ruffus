@@ -6,6 +6,11 @@
         <h3 class="pull-right mb-4">Endereços</h3>
     </div>
     <div>
+    {% if not enderecos %}
+        <span id="notifications" class="">
+            Você não possui endereços cadastrados
+        </span>
+    {% else %}
     {% for endereco in enderecos %}
         <div class="card" style="background-color: #5b80b2">
             <div class="card-content" style="color: white;">
@@ -28,6 +33,7 @@
             </div>
         </div>
     {% endfor %}
+    {% endif %}
         <div style="padding-top: 50px; padding-bottom: 100px">
             <a href="{% url 'usuarios:cadastro_endereco' %}"><button class="btn btn-info">Cadastrar novo endereço</button></a>
         </div>
