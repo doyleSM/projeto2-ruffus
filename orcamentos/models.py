@@ -6,16 +6,16 @@ from catalogo.models import Servico
 
 class Solicitacao(models.Model):
 
-    cliente = models.OneToOneField(Cliente, on_delete=models.CASCADE)
-    servico = models.OneToOneField(Servico, on_delete=models.CASCADE)
+    cliente = models.ForeignKey('usuarios.Cliente', related_name='Cliente', on_delete=models.CASCADE)
+    servico = models.ForeignKey('catalogo.Servico', on_delete=models.CASCADE)
     aberta = models.BooleanField('Aberta', default=True)
-    endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE)
+    endereco = models.ForeignKey('usuarios.Endereco', on_delete=models.CASCADE)
     descricao = models.TextField('Descricao')
     hora_solicitacao = models.DateTimeField(auto_now_add=True)
     hora_aceitacao = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.cliente.user.get_full_name() + ' - ' + self.servico.nome
+        return self.servico.nome
 
     class Meta:
         verbose_name_plural = 'Solicitações'

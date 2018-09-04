@@ -18,9 +18,12 @@ from django.urls import path, include
 from csite.views import index
 from catalogo.views import lista_servicos
 
+
 urlpatterns = [
     path('', lista_servicos, name='index'),
     path('admin/', admin.site.urls),
     path('catalogo/', include('catalogo.urls', namespace='catalogo')),
     path('usuarios/', include('usuarios.urls', namespace='usuarios')),
+    path('orcamentos/', include('orcamentos.urls', namespace='orcamentos')),
+
 ]

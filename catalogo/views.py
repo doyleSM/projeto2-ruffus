@@ -1,17 +1,18 @@
 # -*- coding: utf 8 -*-
 
-
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from .models import Servico, Categoria
 
+
 class ListaServicosView(generic.ListView):
+
     model = Servico
     template_name = 'catalogo/lista_servicos.html'
     context_object_name = 'servicos'
 
-lista_servicos = ListaServicosView.as_view()
 
+lista_servicos = ListaServicosView.as_view()
 
 
 class ListaPorCategoriaView(generic.ListView):
@@ -28,6 +29,7 @@ class ListaPorCategoriaView(generic.ListView):
         context['categoria_atual'] = get_object_or_404(Categoria, slug=self.kwargs['slug'])
         return context
 
+
 lista_por_categoria = ListaPorCategoriaView.as_view()
 
 
@@ -41,5 +43,4 @@ class DetalheServicoView(generic.ListView):
 
 
 detalhe_servico = DetalheServicoView.as_view()
-
 
