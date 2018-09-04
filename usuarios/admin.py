@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Cliente, User, Endereco, Prestador
 
+
 class ClienteAdmin(admin.ModelAdmin):
     fields = [('CPF', 'user'), ]
     list_display = ['usuario', 'nome', 'CPF', 'status', 'endereco']
