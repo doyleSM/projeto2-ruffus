@@ -39,12 +39,14 @@
     	                Meus endereços
 	                </a>
 	            </li>
+            {% if user.is_cliente %}
 	            <li>
-	                <a href="#">
-    	                <span class="fa fa-btc "></span>
-    	                payment details
+	                <a href="{% url 'usuarios:solicitacoes_cliente' %}">
+    	                <span class="fa fa-money"></span>
+    	                Minhas solicitações
 	                </a>
 	            </li>
+            {% endif %}
 	            {% if user.is_prestador %}
                 <li>
 	                <a href="{% url 'usuarios:categorias_prestador' %}">

@@ -4,8 +4,7 @@
 <style>
 
 .landing {
-  height: 100vh;
-
+  margin-top: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -44,11 +43,11 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: lightgray;
   height: 100%;
   width: 50%;
 }
 .page .image img {
+    margin-top: 100px !important;
   width: 90%;
 }
 .page .about {
@@ -124,15 +123,18 @@
             flex-direction: column;
   }
   .page .image {
+
     padding-top: 8px;
     width: 100%;
     height: 20%;
   }
   .page .image img {
+
     height: 100%;
     width: initial;
   }
   .page .about {
+
     overflow-y: scroll;
     max-width: 100%;
   }
@@ -141,31 +143,24 @@
 {% endblock %}
 {% block container %}
 <div class="landing">
-  <div class="page">
-    <div class="image">
-      <img src="https://placeimg.com/640/480/any" />
-    </div>
-    <div class="about">
-      <div class="main">
-        <div class="title">
-          {{ servico }}
+    <div class="page">
+        <div class="image">
+            <img src="https://placeimg.com/640/480/any" />
         </div>
-        <div class="description">
-        {{ servico.descricao }}
+        <div class="about">
+            <div class="main">
+                <div class="title">
+                    {{ servico }}
+                </div>
+                <div class="description">
+                    {{ servico.descricao }}
+                </div>
+                <div>
+                    {% block solicitacao %}
+                    {% endblock %}
+                </div>
+            </div>
         </div>
-          <div>
-              {% block solicitacao %}
-              {% endblock %}
-          </div>
-      </div>
-      <div class="controls">
-        <a href="#" target="">
-          <div class="try">
-            Solicitar Orçamento
-          </div>
-        </a>
-      </div>
     </div>
-  </div>
 </div>
 {% endblock container %}

@@ -1,0 +1,46 @@
+{% extends 'usuarios/minha_conta_cliente.html' %}
+{% load widget_tweaks %}
+
+{% block conta %}
+    <div style="padding-bottom: 80px">
+        <h3 class="pull-right mb-4">Solicitações</h3>
+    </div>
+    <div>
+    {% if not solicitacoes %}
+        <span id="notifications" class="">
+            Você não possui nenhuma solicitação
+        </span>
+    {% else %}
+    {% for solicitacao in solicitacoes %}
+        <div class="card" style="background-color: #5b80b2">
+            <div class="card-content" style="color: white;">
+                 <strong style="font-size: 18px">{{ solicitacao.servico.nome }}</strong>
+            </div>
+            <div class="card-body bg-light">
+                <div>
+                    {% if solicitacao.aberta %}
+                        <strong>Status:</strong> <strong style="color: green">Em aberto <i class="fa fa-check-square" aria-hidden="true"></i></strong>
+                    {% else %}
+                        <strong>Status:</strong> <strong style="color: red"> Encerrada <i class="fa fa-times" aria-hidden="true"></i></strong>
+                    {% endif %}
+                </div>
+                <div>
+                    <strong>Endereco</strong> - {{ solicitacao.endereco }}
+                </div>
+                <div>
+                    <strong>Descrição</strong> - {{ solicitacao.descricao }}
+                </div>
+                <div>
+                    <strong>Hora solicitação</strong> - {{ solicitacao.hora_solicitacao }}
+                </div>
+            </div>
+            <div >
+                <a href="#"> <button class="btn btn-warning btn-sm" style="float: right; margin-right: 10px">Editar</button></a>
+                <a href="#"> <button class="btn btn-danger btn-sm" style="float: right; margin-right: 10px">Excluir</button></a>
+            </div>
+        </div>
+    {% endfor %}
+    {% endif %}
+
+    </div>
+{% endblock %}

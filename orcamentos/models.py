@@ -9,7 +9,7 @@ class Solicitacao(models.Model):
     cliente = models.ForeignKey('usuarios.Cliente', related_name='Cliente', on_delete=models.CASCADE)
     servico = models.ForeignKey('catalogo.Servico', on_delete=models.CASCADE)
     aberta = models.BooleanField('Aberta', default=True)
-    endereco = models.ForeignKey('usuarios.Endereco', on_delete=models.CASCADE)
+    endereco = models.ForeignKey('usuarios.Endereco', verbose_name='Endereço',on_delete=models.CASCADE)
     descricao = models.TextField('Descricao')
     hora_solicitacao = models.DateTimeField(auto_now_add=True)
     hora_aceitacao = models.DateTimeField(auto_now=True)

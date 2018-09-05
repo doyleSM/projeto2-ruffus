@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from .models import Solicitacao
 from catalogo.models import Servico
 from usuarios.models import Cliente
@@ -17,14 +17,26 @@ class SolicitacaoView(CreateView):
     template_name = 'orcamentos/nova_solicitacao.html'
 
     def form_valid(self, form):
+        form.instance.cliente = Cliente.objects.get(user=self.request.user)
+        form.instance.servico = Servico.objects.get(slug=self.kwargs['slug'])
         form.save()
-        #form.instance.cliente = Cliente.objects.get(user=self.request.user)
-        #form.instance.servico = Servico.objects.get(slug=self.kwargs['slug'])
-        #form.instance.servico.set(Servico.objects.get(slug=self.kwargs['slug']))
-        #form.instance.cliente.set(Cliente.objects.get(user=self.request.user))
 
         return redirect(self.get_success_url())
+
+    def get_context_data(self, **kwargs):
+        context = super(SolicitacaoView, self).get_context_data(**kwargs)
+        context['servico'] = Servico.objects.get(slug=self.kwargs['slug'])
+        return context
+
 
     def get_success_url(self):
         messages.success(self.request, 'Solicitado com sucesso!')
         return reverse('index')
+
+
+class SolicitacaoListView(ListView):
+    template_name = 'orcamentos/minhas_solicitacoes.html'
+    context_object_name = 'solicitacoes'
+
+    def get_queryset(self):
+        return Solicitacao.objects.filter(cliente_id=self.request.user.cliente.pk)

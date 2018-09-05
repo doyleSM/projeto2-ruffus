@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import ClienteCadastroView, logout_view, PrestadorCadastroView, PrestadorCategoriasView, Login, MinhaContaClienteView
 from .views import AlterarSenhaView, EnderecoView, EnderecoListView, EnderecoEditar, EnderecoDeletar, DadosPessoaisList
-
+from orcamentos.views import SolicitacaoListView
 app_name = 'usuarios'
 urlpatterns = [
     path('cadastro/cliente/', ClienteCadastroView.as_view(), name='cadastro_cliente'),
@@ -14,6 +14,7 @@ urlpatterns = [
     path('endereco/atualizar/<int:pk>/', EnderecoEditar.as_view(), name='editar_endereco'),
     path('endereco/deletar/<int:pk>/', EnderecoDeletar.as_view(), name='deletar_endereco'),
     path('dados-pessoais/', DadosPessoaisList.as_view(), name='dados_pessoais'),
+    path('solicitacoes/', SolicitacaoListView.as_view(), name='solicitacoes_cliente'),
     path('login/', Login.as_view(), name='login'),
     path('logout/', logout_view, name='logout'),
 ]

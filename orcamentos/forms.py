@@ -6,4 +6,4 @@ class SolicitacaoForm(ModelForm):
 
     class Meta:
         model = Solicitacao
-        fields = ['cliente', 'servico', 'endereco', 'descricao']
+        fields = ['descricao', 'endereco']

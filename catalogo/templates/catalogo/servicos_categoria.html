@@ -21,7 +21,7 @@
                 <div class="col-md-4">
                     <div class="card-content">
                         <div class="card-img">
-                            <a href="{% url 'catalogo:detalhe_servico' servico.slug %}">
+                            <a href="{% url 'orcamentos:solicitar_orcamento' servico.slug %}">
                                 <img src="https://placeimg.com/380/230/animals" alt="">
                             </a>
                             <!--<span><h4>heading</h4></span> -->
@@ -29,7 +29,7 @@
                         <div class="card-desc">
                             <h3>{{ servico.nome }}</h3>
                             <p>{{ servico.descricao }}</p>
-                                <a href="{% url 'catalogo:detalhe_servico' servico.slug %}" class="btn-card">Saiba mais</a>
+                                <a href="{% url 'orcamentos:solicitar_orcamento' servico.slug %}" class="btn-card">Saiba mais</a>
                         </div>
                     </div>
                 </div>

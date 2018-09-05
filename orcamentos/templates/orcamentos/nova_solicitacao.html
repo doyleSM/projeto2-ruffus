@@ -1,12 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'catalogo/detalhe_servico.html' %}
 {% load static %}
 {% load widget_tweaks %}
 
-{% block container %}
-
-    <h3 class="pull-right mb-4">Endereço</h3>
+{% block solicitacao %}
     <form class="form-horizontal" method='post' style="padding-top: 80px">
         {% csrf_token %}
+
         <fieldset>
             {% for field in form %}
                 <div class="form-group {% if field.errors %} has-error{% endif %}">
@@ -21,7 +20,8 @@
                     </div>
                 </div>
             {% endfor %}
-            <button class="btn btn-success align-right" type="submit">Salvar</button>
-        </fieldset>
+       </fieldset>
+        <button class="btn btn-success align-right" type="submit">Solicitar</button>
+
     </form>
 {% endblock %}
