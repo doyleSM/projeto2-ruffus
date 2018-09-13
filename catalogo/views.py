@@ -21,6 +21,7 @@ class ListaPorCategoriaView(generic.ListView):
     context_object_name = 'servicos'
 
     def get_queryset(self):
+
         categoria = get_object_or_404(Categoria, slug=self.kwargs['slug'])
         return Servico.objects.filter(categoria=categoria)
 

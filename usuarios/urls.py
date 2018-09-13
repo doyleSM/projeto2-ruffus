@@ -2,6 +2,8 @@ from django.urls import path
 from .views import ClienteCadastroView, logout_view, PrestadorCadastroView, PrestadorCategoriasView, Login, MinhaContaClienteView
 from .views import AlterarSenhaView, EnderecoView, EnderecoListView, EnderecoEditar, EnderecoDeletar, DadosPessoaisList
 from orcamentos.views import SolicitacaoListView
+
+
 app_name = 'usuarios'
 urlpatterns = [
     path('cadastro/cliente/', ClienteCadastroView.as_view(), name='cadastro_cliente'),

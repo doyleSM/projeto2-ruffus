@@ -26,9 +26,9 @@ class Cliente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     CPF = models.CharField('CPF', max_length=15, default='123456789')
 
-
     def __str__(self):
         return self.user.username
+
 
 class Prestador(models.Model):
 

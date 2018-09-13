@@ -2,8 +2,9 @@ from django.contrib.auth import login, REDIRECT_FIELD_NAME
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import CreateView, UpdateView, TemplateView, FormView, ListView, DeleteView
-from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from .decorators import cliente_required, prestador_required
 from .forms import ClienteCadastroForm, PrestadorCadastroForm, EnderecoForm, PrestadorCategoriasForm
 from .models import User, Endereco, Prestador, Cliente
 from django.contrib import messages
@@ -11,9 +12,10 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView
 
+''' VIEW CLIENTES '''
+
 
 class ClienteCadastroView(CreateView):
-
     model = User
     form_class = ClienteCadastroForm
     template_name = 'usuarios/cadastro_cliente_form.html'
@@ -30,6 +32,9 @@ class ClienteCadastroView(CreateView):
     def get_success_url(self):
         messages.success(self.request, 'Usuario cadastrado com sucesso!')
         return reverse('index')
+
+
+'''VIEW PRESTADORES'''
 
 
 class PrestadorCadastroView(CreateView):
@@ -52,25 +57,7 @@ class PrestadorCadastroView(CreateView):
         return reverse('index')
 
 
-def logout_view(request):
-    logout(request)
-    messages.success(request, 'Desconectado com sucesso!')
-    return redirect('index')
-
-
-class Login(LoginView):
-
-    form_class = AuthenticationForm
-    authentication_form = None
-    #redirect_field_name = REDIRECT_FIELD_NAME
-    template_name = 'usuarios/login.html'
-    redirect_authenticated_user = 'index'
-
-    def get_success_url(self):
-        messages.success(self.request, 'Usuário logado')
-        return reverse('index')
-
-
+@method_decorator([login_required(login_url='usuarios:login'), prestador_required(login_url='usuarios:login')], name='dispatch')
 class PrestadorCategoriasView(UpdateView):
 
     model = Prestador
@@ -86,11 +73,32 @@ class PrestadorCategoriasView(UpdateView):
         return super().form_valid(form)
 
 
-class MinhaContaClienteView(TemplateView):
+'''VIEWS COMUM DOS DOIS'''
 
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'Desconectado com sucesso!')
+    return redirect('index')
+
+
+class Login(LoginView):
+    form_class = AuthenticationForm
+    authentication_form = None
+    template_name = 'usuarios/login.html'
+    redirect_authenticated_user = 'index'
+
+    def get_success_url(self):
+        #messages.success(self.request, 'Usuário logado')
+        return reverse('index')
+
+
+@method_decorator([login_required(login_url='usuarios:login')], name='dispatch')
+class MinhaContaClienteView(TemplateView):
     template_name = 'usuarios/minha_conta_cliente.html'
 
 
+@method_decorator([login_required(login_url='usuarios:login')], name='dispatch')
 class AlterarSenhaView(FormView):
 
     template_name = 'usuarios/alterar_senha.html'
@@ -112,6 +120,7 @@ class AlterarSenhaView(FormView):
         return reverse('usuarios:cliente_conta')
 
 
+@method_decorator([login_required(login_url='usuarios:login')], name='dispatch')
 class EnderecoView(CreateView):
 
     model = Endereco
@@ -128,6 +137,7 @@ class EnderecoView(CreateView):
         return reverse('usuarios:lista_enderecos')
 
 
+@method_decorator([login_required(login_url='usuarios:login')], name='dispatch')
 class EnderecoListView(ListView):
 
     template_name = 'usuarios/lista_endereco.html'
@@ -139,6 +149,7 @@ class EnderecoListView(ListView):
         return Endereco.objects.filter(usuario=self.request.user)
 
 
+@method_decorator([login_required(login_url='usuarios:login')], name='dispatch')
 class EnderecoEditar(UpdateView):
 
     model = Endereco
@@ -147,7 +158,6 @@ class EnderecoEditar(UpdateView):
     success_url = reverse_lazy('usuarios:lista_enderecos')
 
     def get_object(self):
-        #return Endereco.objects.get(pk=self.kwargs['pk'], usuario=self.request.user)
         return get_object_or_404(Endereco, pk=self.kwargs['pk'], usuario=self.request.user)
 
     def form_valid(self, form):
@@ -159,6 +169,7 @@ class EnderecoEditar(UpdateView):
         return reverse('usuarios:lista_enderecos')
 
 
+@method_decorator([login_required(login_url='usuarios:login')], name='dispatch')
 class EnderecoDeletar(DeleteView):
 
     template_name_suffix = '_confirma_exclusao'
@@ -172,6 +183,7 @@ class EnderecoDeletar(DeleteView):
         return reverse('usuarios:lista_enderecos')
 
 
+@method_decorator([login_required(login_url='usuarios:login')], name='dispatch')
 class DadosPessoaisList(ListView):
     template_name = 'usuarios/dados_pessoais.html'
     context_object_name = 'dados'
