@@ -17,4 +17,4 @@ class OrcamentoForm(ModelForm):
 
     class Meta:
         model = Orcamento
-        fields = ['prestador', 'solicitacao', 'descricao', 'valor']
+        fields = ['descricao', 'valor']
