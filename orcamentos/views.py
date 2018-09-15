@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DetailView
 from .models import Solicitacao, Orcamento
 from catalogo.models import Servico
 from usuarios.models import Cliente, Categoria, Prestador
@@ -34,7 +34,9 @@ class SolicitacaoView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(SolicitacaoView, self).get_context_data(**kwargs)
         context['servico'] = Servico.objects.get(slug=self.kwargs['slug'])
+
         return context
+
 
     def get_success_url(self):
         messages.success(self.request, 'Solicitado com sucesso!')
@@ -45,6 +47,7 @@ class SolicitacaoView(CreateView):
 class SolicitacaoListView(ListView):
     template_name = 'orcamentos/minhas_solicitacoes.html'
     context_object_name = 'solicitacoes'
+
 
     def get_queryset(self):
         return Solicitacao.objects.filter(cliente_id=self.request.user.cliente.pk)
@@ -86,12 +89,16 @@ class SolicitacoesAbertasListView(ListView):
         prestador = self.request.user.prestador
         categorias = Categoria.objects.filter(prestador=prestador)
 
-        return Solicitacao.objects.filter(servico__categoria__in=categorias)
+        return Solicitacao.objects.filter(servico__categoria__in=categorias, aberta=True)
 
 
 
+class OrcamentosListViewSolicitacoes(ListView):
+    template_name = 'orcamentos/orcamentos_solicitacao.html'
+    context_object_name = 'orcamentos'
 
-
+    def get_queryset(self):
+        return Orcamento.objects.filter(solicitacao_id=self.kwargs['pk'])
 
 
 

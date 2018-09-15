@@ -17,6 +17,7 @@ class Solicitacao(models.Model):
     def __str__(self):
         return self.servico.nome
 
+
     class Meta:
         verbose_name_plural = 'Solicitações'
         verbose_name = 'Solicitação'

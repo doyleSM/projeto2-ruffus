@@ -33,10 +33,15 @@
                 <div>
                     <strong>Hora solicitação</strong> - {{ solicitacao.hora_solicitacao }}
                 </div>
+                <div>
+                    {{ total_pedidos }}
+                </div>
             </div>
             <div >
                 <a href="#"> <button class="btn btn-warning btn-sm" style="float: right; margin-right: 10px">Editar</button></a>
                 <a href="#"> <button class="btn btn-danger btn-sm" style="float: right; margin-right: 10px">Excluir</button></a>
+                <a href="{%  url 'orcamentos:orcamentos_solicitacoes' solicitacao.pk  %}"> <button class="btn btn-primary btn-sm" style="float: left; margin-right: 10px">Ver orçamentos</button></a>
+
             </div>
         </div>
     {% endfor %}
