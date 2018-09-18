@@ -5,47 +5,36 @@
     <div style="padding-bottom: 80px">
         <h3 class="pull-right mb-4">Solicitações</h3>
     </div>
-    <div>
     {% if not solicitacoes %}
         <span id="notifications" class="">
             Você não possui nenhuma solicitação
         </span>
     {% else %}
     {% for solicitacao in solicitacoes %}
-        <div class="card" style="background-color: #5b80b2">
-            <div class="card-content" style="color: white;">
-                 <strong style="font-size: 18px">{{ solicitacao.servico.nome }}</strong>
-            </div>
-            <div class="card-body bg-light">
-                <div>
-                    {% if solicitacao.aberta %}
-                        <strong>Status:</strong> <strong style="color: green">Em aberto <i class="fa fa-check-square" aria-hidden="true"></i></strong>
-                    {% else %}
-                        <strong>Status:</strong> <strong style="color: red"> Encerrada <i class="fa fa-times" aria-hidden="true"></i></strong>
-                    {% endif %}
+            <div class="my-3 p-3 bg-white rounded box-shadow" style="margin-left: -50px; ">
+                <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                        <strong class="d-block text-gray-dark">
+                            {{ solicitacao.servico }}
+                        </strong>
+                </p>
+                <div class="media pt-3">
+                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <strong class="d-block text-gray-dark">
+                            {% if solicitacao.aberta %}
+                                <strong>Status:</strong> <strong style="color: green">Em aberto <i class="fa fa-check-square" aria-hidden="true"></i></strong>
+                            {% else %}
+                                <strong>Status:</strong> <strong style="color: red"> Encerrada <i class="fa fa-times" aria-hidden="true"></i></strong>
+                                {% endif %}</strong>
+                                <strong class="d-block">Endereco</strong>{{ solicitacao.endereco }}
+                                <strong class="d-block">Hora solicitação</strong>{{ solicitacao.hora_solicitacao }}
+                                <strong class="d-block"> Descrição</strong>{{ solicitacao.descricao }}
+                    </p>
                 </div>
-                <div>
-                    <strong>Endereco</strong> - {{ solicitacao.endereco }}
-                </div>
-                <div>
-                    <strong>Descrição</strong> - {{ solicitacao.descricao }}
-                </div>
-                <div>
-                    <strong>Hora solicitação</strong> - {{ solicitacao.hora_solicitacao }}
-                </div>
-                <div>
-                    {{ total_pedidos }}
-                </div>
-            </div>
-            <div >
-                <a href="#"> <button class="btn btn-warning btn-sm" style="float: right; margin-right: 10px">Editar</button></a>
-                <a href="#"> <button class="btn btn-danger btn-sm" style="float: right; margin-right: 10px">Excluir</button></a>
-                <a href="{%  url 'orcamentos:orcamentos_solicitacoes' solicitacao.pk  %}"> <button class="btn btn-primary btn-sm" style="float: left; margin-right: 10px">Ver orçamentos</button></a>
+                <button type="button" class="btn btn-sm btn-outline-warning" style="float: right; margin-right: 10px">Editar</button>
+                <button type="button" class="btn btn-sm btn-outline-danger" style="float: right; margin-right: 10px">Excluir</button>
+                <a href="{%  url 'orcamentos:orcamentos_solicitacoes' solicitacao.pk  %}"><button type="button" class="btn btn-sm btn-outline-primary">Ver orçamentos</button></a>
 
             </div>
-        </div>
     {% endfor %}
     {% endif %}
-
-    </div>
 {% endblock %}
