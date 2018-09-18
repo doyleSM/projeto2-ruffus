@@ -97,6 +97,13 @@ class OrcamentosListViewSolicitacoes(ListView):
     template_name = 'orcamentos/orcamentos_solicitacao.html'
     context_object_name = 'orcamentos'
 
+    def get_context_data(self, **kwargs):
+        context = super(OrcamentosListViewSolicitacoes, self).get_context_data(**kwargs)
+        solicitacao = Solicitacao.objects.get(id=self.kwargs['pk'])
+
+        context['servico'] = solicitacao.servico
+        return context
+
     def get_queryset(self):
         return Orcamento.objects.filter(solicitacao_id=self.kwargs['pk'])
 
