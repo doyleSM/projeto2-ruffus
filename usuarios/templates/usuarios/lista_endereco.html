@@ -5,31 +5,30 @@
     <div style="padding-bottom: 80px">
         <h3 class="pull-right mb-4">Endereços</h3>
     </div>
-    <div>
+    <div style="margin-top: -80px !important;">
     {% if not enderecos %}
         <span id="notifications" class="">
             Você não possui endereços cadastrados
         </span>
     {% else %}
     {% for endereco in enderecos %}
-        <div class="card" style="background-color: #5b80b2">
-            <div class="card-content" style="color: white;">
-                Rua - {{ endereco.nome_rua }}
+        <div class="my-3 p-3 bg-white rounded box-shadow" style="margin-left: -50px; ">
+            <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                <strong class="text-gray-dark">
+                    {{ endereco.nome_rua }}
+                </strong>
+            </p>
+            <div class="media pt-3">
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="text-gray-dark">Rua: </strong>{{ endereco.nome_rua }}
+                    <strong class=""><br>Complemento: </strong>{{ endereco.complemento  }}
+                    <strong class=""><br>Bairro: </strong>{{ endereco.bairro }}
+                    <strong class=""><br>CEP: </strong>{{ endereco.CEP }}
+                </p>
             </div>
-            <div class="card-body bg-light">
-                <div>
-                    Complemento - {{ endereco.complemento }}
-                </div>
-                <div>
-                    Bairro - {{ endereco.bairro }}
-                </div>
-                <div>
-                    CEP - {{ endereco.CEP }}
-                </div>
-            </div>
-            <div >
-                <a href="{% url 'usuarios:editar_endereco' endereco.pk %}"> <button class="btn btn-warning btn-sm" style="float: right; margin-right: 10px">Editar</button></a>
-                <a href="{% url 'usuarios:deletar_endereco' endereco.pk %}"> <button class="btn btn-danger btn-sm" style="float: right; margin-right: 10px">Excluir</button></a>
+            <div class="media">
+                <a href="{% url 'usuarios:editar_endereco' endereco.pk %}"> <button type="button" class="btn btn-sm btn-outline-warning" style="float: right !important; margin-right: 10px">Editar</button></a>
+                <a href="{% url 'usuarios:deletar_endereco' endereco.pk %}"><button type="button" class="btn btn-sm btn-outline-danger" style="float: right !important; margin-right: 10px">Excluir</button></a>
             </div>
         </div>
     {% endfor %}
