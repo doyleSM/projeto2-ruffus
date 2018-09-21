@@ -37,7 +37,6 @@ class SolicitacaoView(CreateView):
 
         return context
 
-
     def get_success_url(self):
         messages.success(self.request, 'Solicitado com sucesso!')
         return reverse('usuarios:solicitacoes_cliente')
@@ -47,7 +46,6 @@ class SolicitacaoView(CreateView):
 class SolicitacaoListView(ListView):
     template_name = 'orcamentos/minhas_solicitacoes.html'
     context_object_name = 'solicitacoes'
-
 
     def get_queryset(self):
         return Solicitacao.objects.filter(cliente_id=self.request.user.cliente.pk)

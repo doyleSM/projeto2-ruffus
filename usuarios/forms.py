@@ -1,21 +1,25 @@
 from django.forms import ModelForm, CheckboxSelectMultiple
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from usuarios.models import Cliente, Endereco, User, Prestador
 
 
 class ClienteCadastroForm(UserCreationForm):
+    CPF = forms.CharField()
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email',)
+        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email', 'CPF')
 
     @transaction.atomic
-    def save(self):
+    def save(self, cpf):
         user = super().save(commit=False)
         user.is_cliente = True
         user.save()
         Cliente.objects.create(user=user)
+        user.cliente.CPF = cpf
+        user.cliente.save()
         return user
 
 

@@ -25,7 +25,8 @@ class ClienteCadastroView(CreateView):
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
-        user = form.save()
+        cpf = form.cleaned_data['CPF']
+        user = form.save(cpf)
         login(self.request, user)
         return redirect(self.get_success_url())
 

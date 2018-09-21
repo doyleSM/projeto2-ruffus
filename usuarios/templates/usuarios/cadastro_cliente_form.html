@@ -51,6 +51,13 @@
                      </div>
                      {% render_field form.email class="form-control" placeholder='Email' %}
                 </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                         {{ form.CPF.errors }}
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                     </div>
+                     {% render_field form.CPF class="form-control" placeholder='CPF' %}
+                </div> <!-- form-group// -->
 
                 <div class="form-group input-group">
                      {{ form.password1.errors }}
