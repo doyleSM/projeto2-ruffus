@@ -23,7 +23,7 @@
                 </p>
                 <span class="badge  badge-warning">R$ {{ orcamento.valor }}</span>
             </div>
-         <button type="button" class="btn btn-sm btn-outline-success">Aceitar</button>
+        <a href="{% url 'orcamentos:aceitar-orcamento' orcamento.pk orcamento.solicitacao.pk %}"><button type="button" class="btn btn-sm btn-outline-success">Aceitar</button></a>
         <button type="button" class="btn btn-sm btn-outline-danger">Descartar</button>
         </div>
     {% endfor %}

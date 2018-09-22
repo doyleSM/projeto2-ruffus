@@ -107,6 +107,18 @@ class OrcamentosListViewSolicitacoes(ListView):
 
 
 
+
+def aceitarOrcamento(request, orcamentopk, solicitacaopk):
+    orcamento = Orcamento.objects.get(pk=orcamentopk)
+    solicitacao = Solicitacao.objects.get(pk=solicitacaopk)
+    solicitacao.aberta = False
+    solicitacao.save()
+    orcamento.aceito = True
+    messages.success(request, 'Orçamento aceito com sucesso!')
+    return redirect('usuarios:solicitacoes_cliente')
+
+
+
 '''class EnderecoEditar(UpdateView):
 
     model = Endereco
