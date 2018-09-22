@@ -87,7 +87,7 @@ class SolicitacoesAbertasListView(ListView):
         prestador = self.request.user.prestador
         categorias = Categoria.objects.filter(prestador=prestador)
 
-        return Solicitacao.objects.filter(servico__categoria__in=categorias, aberta=True)
+        return Solicitacao.objects.filter(servico__categoria__in=categorias, status=0)
 
 
 
@@ -106,18 +106,40 @@ class OrcamentosListViewSolicitacoes(ListView):
         return Orcamento.objects.filter(solicitacao_id=self.kwargs['pk'])
 
 
-
-
 def aceitarOrcamento(request, orcamentopk, solicitacaopk):
-    orcamento = Orcamento.objects.get(pk=orcamentopk)
+
+        orcamento = Orcamento.objects.get(pk=orcamentopk)
+        solicitacao = Solicitacao.objects.get(pk=solicitacaopk)
+        if solicitacao.cliente.user != request.user:
+            messages.error(request, 'Você não tem permissão!')
+            return redirect('index')
+        else:
+            if solicitacao.status != 0:
+                messages.warning(request, 'Você já aceitou um orçamento para essa solicitação')
+                return redirect('usuarios:solicitacoes_cliente')
+            else:
+                solicitacao.status = 1
+                solicitacao.save()
+                orcamento.aceito = True
+                messages.success(request, 'Orçamento aceito com sucesso!')
+                return redirect('usuarios:solicitacoes_cliente')
+
+
+def cancelarSolicitacao(request, solicitacaopk):
     solicitacao = Solicitacao.objects.get(pk=solicitacaopk)
-    solicitacao.aberta = False
-    solicitacao.save()
-    orcamento.aceito = True
-    messages.success(request, 'Orçamento aceito com sucesso!')
-    return redirect('usuarios:solicitacoes_cliente')
-
-
+    if solicitacao.cliente.user != request.user:
+        messages.error(request, 'Você não tem permissão!')
+        return redirect('index')
+    else:
+        if solicitacao.status != 0:
+            messages.error(request, 'Você já aceitou um orçamento, não há mais possibilidade de cancelamento')
+            messages.warning(request, 'Em paralelo estamos trabalhando para melhorar as opções de cancelamento, agradecemos a compreensão')
+            return redirect('usuarios:solicitacoes_cliente')
+        else:
+            solicitacao.status = 2
+            solicitacao.save()
+            messages.success(request, 'Solicitacção cancelada com sucesso!')
+            return redirect('usuarios:solicitacoes_cliente')
 
 '''class EnderecoEditar(UpdateView):
 

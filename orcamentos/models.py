@@ -6,10 +6,19 @@ from catalogo.models import Servico
 
 class Solicitacao(models.Model):
 
+    SOLICITACAO_STATUS = (
+        (0, 'Solicitado'),
+        (1, 'Aguardando prestador'),
+        (2, 'Cancelado pelo cliente'),
+        (3, 'Cancelado pelo prestador'),
+        (4, 'Aguardando pagamento'),
+        (5, 'Concluido')
+    )
+
     cliente = models.ForeignKey('usuarios.Cliente', related_name='Cliente', on_delete=models.CASCADE)
     servico = models.ForeignKey('catalogo.Servico', on_delete=models.CASCADE)
-    aberta = models.BooleanField('Aberta', default=True)
-    endereco = models.ForeignKey('usuarios.Endereco', verbose_name='Endereço',on_delete=models.CASCADE)
+    status = models.IntegerField('Status', choices=SOLICITACAO_STATUS, default=0)
+    endereco = models.ForeignKey('usuarios.Endereco', verbose_name='Endereço', on_delete=models.CASCADE)
     descricao = models.TextField('Descricao')
     hora_solicitacao = models.DateTimeField(auto_now_add=True)
     hora_aceitacao = models.DateTimeField(auto_now=True)
@@ -17,6 +26,29 @@ class Solicitacao(models.Model):
     def __str__(self):
         return self.servico.nome
 
+    def get_color(self):
+        if self.status == 0:
+            return 'green'
+        elif self.status == 1:
+            return 'blue'
+        elif self.status == 2 or self.status == 3:
+            return 'red'
+        elif self.status == 4:
+            return 'orange'
+        else:
+            return 'rgb(57,255,20)'
+
+    def get_icon(self):
+        if self.status == 0:
+            return 'fa fa-clock-o'
+        elif self.status == 1:
+            return 'fa fa-hourglass-end'
+        elif self.status == 2 or self.status == 3:
+            return 'fa fa-exclamation-triangle'
+        elif self.status == 4:
+            return 'fa fa-credit-card'
+        else:
+            return 'fa fa-check-square'
 
     class Meta:
         verbose_name_plural = 'Solicitações'

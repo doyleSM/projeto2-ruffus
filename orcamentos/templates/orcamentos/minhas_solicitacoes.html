@@ -20,18 +20,18 @@
                 <div class="media pt-3">
                     <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                         <strong class="d-block text-gray-dark">
-                            {% if solicitacao.aberta %}
-                                <strong>Status:</strong> <strong style="color: green">Em aberto <i class="fa fa-check-square" aria-hidden="true"></i></strong>
-                            {% else %}
-                                <strong>Status:</strong> <strong style="color: red"> Encerrada <i class="fa fa-times" aria-hidden="true"></i></strong>
-                                {% endif %}</strong>
+
+
+                                <strong>Status:</strong> <strong style="color: {{ solicitacao.get_color }}"> {{ solicitacao.get_status_display }} </strong><i style="color: {{ solicitacao.get_color }}" class="{{ solicitacao.get_icon }}" aria-hidden="true"></i>
+                            <!-- <i class="fa fa-check-square" aria-hidden="true"></i> -->
+                        </strong>
                                 <strong class="d-block">Endereco</strong>{{ solicitacao.endereco }}
                                 <strong class="d-block">Hora solicitação</strong>{{ solicitacao.hora_solicitacao }}
                                 <strong class="d-block"> Descrição</strong>{{ solicitacao.descricao }}
                     </p>
                 </div>
                 <button type="button" class="btn btn-sm btn-outline-warning" style="float: right; margin-right: 10px">Editar</button>
-                <button type="button" class="btn btn-sm btn-outline-danger" style="float: right; margin-right: 10px">Excluir</button>
+                <a href="{% url 'orcamentos:cancelar-solicitacao' solicitacao.pk %}"><button type="button" class="btn btn-sm btn-outline-danger" style="float: right; margin-right: 10px">Cancelar</button></a>
                 <a href="{%  url 'orcamentos:orcamentos_solicitacoes' solicitacao.pk  %}"><button type="button" class="btn btn-sm btn-outline-primary">Ver orçamentos</button></a>
 
             </div>
