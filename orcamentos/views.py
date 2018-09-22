@@ -121,6 +121,7 @@ def aceitarOrcamento(request, orcamentopk, solicitacaopk):
                 solicitacao.status = 1
                 solicitacao.save()
                 orcamento.aceito = True
+                orcamento.save()
                 messages.success(request, 'Orçamento aceito com sucesso!')
                 return redirect('usuarios:solicitacoes_cliente')
 

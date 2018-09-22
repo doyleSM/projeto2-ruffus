@@ -60,6 +60,7 @@ class Orcamento(models.Model):
     prestador = models.ForeignKey(Prestador, on_delete=models.CASCADE)
     solicitacao = models.ForeignKey(Solicitacao, on_delete=models.CASCADE)
     aceito = models.BooleanField(default=False)
+    descartar = models.BooleanField(default=False)
     descricao = models.TextField('Descrição')
     valor = models.DecimalField('Valor', decimal_places=2, max_digits=10)
 
