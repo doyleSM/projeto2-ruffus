@@ -4,7 +4,7 @@ from catalogo.models import Servico
 from usuarios.models import Cliente, Categoria, Prestador
 from .forms import SolicitacaoForm, OrcamentoForm
 from django.contrib import messages
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse
@@ -116,14 +116,14 @@ def aceitarOrcamento(request, orcamentopk, solicitacaopk):
         else:
             if solicitacao.status != 0:
                 messages.warning(request, 'Você já aceitou um orçamento para essa solicitação')
-                return redirect('usuarios:solicitacoes_cliente')
+                return redirect('orcamentos:orcamentos_solicitacoes', solicitacaopk)
             else:
                 solicitacao.status = 1
                 solicitacao.save()
                 orcamento.aceito = True
                 orcamento.save()
                 messages.success(request, 'Orçamento aceito com sucesso!')
-                return redirect('usuarios:solicitacoes_cliente')
+                return redirect('orcamentos:orcamentos_solicitacoes', solicitacaopk)
 
 
 def cancelarSolicitacao(request, solicitacaopk):
@@ -141,6 +141,38 @@ def cancelarSolicitacao(request, solicitacaopk):
             solicitacao.save()
             messages.success(request, 'Solicitacção cancelada com sucesso!')
             return redirect('usuarios:solicitacoes_cliente')
+
+
+def descartarOrcamento(request, orcamentopk):
+    orcamento = Orcamento.objects.get(pk=orcamentopk)
+    if orcamento.solicitacao.cliente != request.user.cliente:
+        messages.error(request, 'Você não tem permissão!')
+        return redirect('index')
+    else:
+        if orcamento.descartar == 1:
+            messages.warning(request, 'Orçamento já descartado')
+            return redirect('orcamentos:orcamentos_solicitacoes', orcamento.solicitacao.pk)
+        else:
+            orcamento.descartar = 1
+            orcamento.save()
+            messages.success(request, 'Orçamento descartado com sucesso')
+            return redirect('orcamentos:orcamentos_solicitacoes', orcamento.solicitacao.pk)
+
+
+def restaurarOrcamento(request, orcamentopk):
+    orcamento = Orcamento.objects.get(pk=orcamentopk)
+    if orcamento.solicitacao.cliente != request.user.cliente:
+        messages.error(request, 'Você não tem permissão!')
+        return redirect('index')
+    else:
+        if orcamento.descartar == 0:
+            messages.warning(request, 'Orçamento já ativo')
+            return redirect('orcamentos:orcamentos_solicitacoes', orcamento.solicitacao.pk)
+        else:
+            orcamento.descartar = 0
+            orcamento.save()
+            messages.success(request, 'Orçamento restaurado com sucesso')
+            return redirect('orcamentos:orcamentos_solicitacoes', orcamento.solicitacao.pk)
 
 '''class EnderecoEditar(UpdateView):
 

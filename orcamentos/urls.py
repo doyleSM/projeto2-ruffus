@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import SolicitacaoView, OrcamentoView, SolicitacoesAbertasListView, OrcamentosListViewSolicitacoes
-from .views import aceitarOrcamento, cancelarSolicitacao
+from .views import aceitarOrcamento, cancelarSolicitacao, descartarOrcamento, restaurarOrcamento
 
 app_name = 'orcamentos'
 urlpatterns = [
@@ -10,4 +10,7 @@ urlpatterns = [
     path('orcamentos/solicitacoes/<int:pk>/', OrcamentosListViewSolicitacoes.as_view(), name='orcamentos_solicitacoes'),
     path('aceitar-orcamento/<int:orcamentopk>/<int:solicitacaopk>/', aceitarOrcamento, name='aceitar-orcamento'),
     path('cancelar-solicitacao/<int:solicitacaopk>/', cancelarSolicitacao, name='cancelar-solicitacao'),
+    path('descartar-orcamento/<int:orcamentopk>/', descartarOrcamento, name='descartar-orcamento'),
+    path('restaurar-orcamento/<int:orcamentopk>/', restaurarOrcamento, name='restaurar-orcamento'),
+
 ]

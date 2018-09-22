@@ -5,31 +5,55 @@
     <div style="padding-bottom: 80px">
         <h3 class="pull-right mb-4"></h3>
     </div>
-    <div >
-    {% if not orcamentos %}
-        <span id="notifications" class="">
-            Você não possui nenhum Orçamento
-        </span>
-    {% else %}
+    <div>
+        {% if not orcamentos %}
+            <span id="notifications" class="">
+                Você não possui nenhum Orçamento
+            </span>
+        {% else %}
             <h4 class="border-bottom border-gray pb-2 mb-0" style="margin-top: -70px !important;">Orçamentos para {{ servico }}
             </h4>
-    {% for orcamento in orcamentos %}
-        <div class="my-3 p-3 bg-white rounded box-shadow" style="margin-left: -50px; ">
-            <div class="media pt-3">
-                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32" height="32">
-                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <strong class=" text-gray-dark">Prestador: </strong>{{ orcamento.prestador }}
-                    <strong class="d-block text-gray-dark">Descrição: </strong>{{ orcamento.descricao }}
-                </p>
-                <span class="badge  badge-warning">R$ {{ orcamento.valor }}</span>
-
-                {% if orcamento.aceito == True %}<span class="badge badge-success">Aceito</span>{% endif %}
-
-            </div>
-        <a href="{% url 'orcamentos:aceitar-orcamento' orcamento.pk orcamento.solicitacao.pk %}"><button type="button" class="btn btn-sm btn-outline-success">Aceitar</button></a>
-        <button type="button" class="btn btn-sm btn-outline-danger">Descartar</button>
-        </div>
-    {% endfor %}
-    {% endif %}
+            {% for orcamento in orcamentos %}
+                {% if orcamento.descartar == False %}
+                    <div class="my-3 p-3 bg-white rounded box-shadow" style="margin-left: -50px; ">
+                        <div class="media pt-3">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32" height="32">
+                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                <strong class=" text-gray-dark">Prestador: </strong>{{ orcamento.prestador }}
+                                <strong class="d-block text-gray-dark">Descrição: </strong>{{ orcamento.descricao }}
+                            </p>
+                            <span class="badge  badge-warning">R$ {{ orcamento.valor }}</span>
+                            {% if orcamento.aceito == True %}<span class="badge badge-success">Aceito</span>{% endif %}
+                        </div>
+                        <a href="{% url 'orcamentos:aceitar-orcamento' orcamento.pk orcamento.solicitacao.pk %}"><button type="button" class="btn btn-sm btn-outline-success">Aceitar</button></a>
+                        <a href="{% url 'orcamentos:descartar-orcamento' orcamento.pk %}"> <button type="button" class="btn btn-sm btn-outline-danger">Descartar</button></a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     </div>
+        <button class="btn btn-sm btn-outline-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -50px">
+            Descartados
+        </button>
+
+    <div class="collapse" id="collapseExample" style="margin-left: -50px; padding: 15px 0 50px 0">
+        <div class="card card-body">
+            {% for orcamento in orcamentos %}
+                {% if orcamento.descartar == True %}
+                    <div class="media pt-3">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32" height="32">
+                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                            <strong class=" text-gray-dark">Prestador: </strong>{{ orcamento.prestador }}
+                            <strong class="d-block text-gray-dark">Descrição: </strong>{{ orcamento.descricao }}
+                                <br>
+                            <span class="badge  badge-warning">R$ {{ orcamento.valor }}</span>
+                            <a href="{% url 'orcamentos:restaurar-orcamento' orcamento.pk %}"> <div class="btn btn-outline-secondary btn-sm"> Restaurar</div></a>
+
+
+                    </div>
+                {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}
