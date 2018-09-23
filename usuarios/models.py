@@ -32,6 +32,8 @@ class Cliente(models.Model):
 
 class Prestador(models.Model):
 
+    data_cadastro = models.DateField('Ingressou em', auto_now_add=True)
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     CPF = models.CharField('CPF', max_length=15, default='12345678')
     categorias = models.ManyToManyField(Categoria, blank=True)
@@ -42,3 +44,7 @@ class Prestador(models.Model):
     class Meta:
         verbose_name_plural = 'Prestadores'
         verbose_name = 'Prestador'
+
+    def get_categorias(self):
+        categorias = Categoria.objects.filter(prestador=self)
+        return categorias

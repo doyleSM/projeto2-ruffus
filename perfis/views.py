@@ -6,10 +6,10 @@ from django.views.generic import ListView
 
 class PerfilPrestador(ListView):
 
-    template_name = 'perfis/perfil_prestador'
+    template_name = 'perfis/perfil_prestador.html'
     context_object_name = 'perfil'
 
     #paginate_by = 5
 
     def get_queryset(self):
-        return Prestador.objects.get(self.kwargs['pk'])
+        return Prestador.objects.get(pk=self.kwargs['pk'])

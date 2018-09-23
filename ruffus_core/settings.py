@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'csite',
     'catalogo',
     'usuarios',
-    'orcamentos'
+    'orcamentos',
+    'perfis'
 ]
 
 MIDDLEWARE = [

@@ -58,7 +58,6 @@ class OrcamentoView(CreateView):
     form_class = OrcamentoForm
     template_name = 'orcamentos/novo_orcamento.html'
 
-
     def form_valid(self, form):
         form.instance.prestador = Prestador.objects.get(user=self.request.user.prestador)
         form.instance.solicitacao = Solicitacao.objects.get(pk=self.kwargs['pk'])
@@ -88,7 +87,6 @@ class SolicitacoesAbertasListView(ListView):
         categorias = Categoria.objects.filter(prestador=prestador)
 
         return Solicitacao.objects.filter(servico__categoria__in=categorias, status=0)
-
 
 
 class OrcamentosListViewSolicitacoes(ListView):

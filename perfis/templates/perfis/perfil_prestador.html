@@ -1,11 +1,234 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 <head>
+    {%  block script %}
+        	<link href="{% static 'bootstrap/css/perfil_prestador.css' %}" rel="stylesheet">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    {% endblock script %}
     <meta charset="UTF-8">
-    <title>Title</title>
 </head>
+{% block container %}
 <body>
-{{ prestador.user.first_name }}
+    <div class="container bootstrap snippets" style="margin-top: 50px !important;">
+        <div class="row" id="user-profile">
+            <div class="col-lg-3 col-md-4 col-sm-4">
+                <div class="main-box clearfix">
+                    <h2>{{ perfil.user.get_full_name }}</h2>
+                    <div class="profile-status">
+                        <i class="fa fa-check-circle"></i> Online
+                    </div>
+                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="profile-img img-responsive center-block">
+                    <div class="profile-label">
+                        <span class="label label-danger">
+                            {% for categoria in perfil.get_categorias %}
+                                {{ categoria }}
+                            {% endfor %}
+                        </span>
+                    </div>
+                    <div class="profile-stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <span>Super User</span>
+                    </div>
 
+                    <div class="profile-since">
+                        Membro desde: {{ perfil.data_cadastro }}
+                    </div>
+
+                    <div class="profile-details">
+                        <ul class="fa-ul">
+                            <li><i class="fa-li fa fa-truck"></i>Orders: <span>456</span></li>
+                            <li><i class="fa-li fa fa-comment"></i>Posts: <span>828</span></li>
+                            <li><i class="fa-li fa fa-tasks"></i>Tasks done: <span>1024</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="profile-message-btn center-block text-center">
+                        <a href="#" class="btn btn-success">
+                            <i class="fa fa-envelope"></i> Send message
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-7">
+                <div class="main-box clearfix">
+                    <div class="profile-header">
+                        <h3 style="text-align: center"><span>Dados do Usuário</span></h3>
+                    </div>
+
+                    <div class="row profile-user-info">
+                        <div class="col-sm-7">
+                            <div class="profile-user-details clearfix">
+                                <div class="profile-user-details-label">
+                                    Nome:
+                                </div>
+                                <div class="profile-user-details-value">
+                                    {{ perfil.user.first_name }}
+                                </div>
+                            </div>
+                            <div class="profile-user-details clearfix">
+                                <div class="profile-user-details-label">
+                                    Sobrenome:
+                                </div>
+                                <div class="profile-user-details-value">
+                                    {{ perfil.user.last_name }}
+                                </div>
+                            </div>
+
+                            <div class="profile-user-details clearfix">
+                                <div class="profile-user-details-label">
+                                    Telefone:
+                                </div>
+                                <div class="profile-user-details-value">
+                                    {{ perfil.user.telefone }}a
+                                </div>
+                            </div>
+                            <div class="profile-user-details clearfix">
+                                <div class="profile-user-details-label">
+                                    Categorias:
+                                </div>
+                                <div class="profile-user-details-value">
+                                    {% for categoria in perfil.get_categorias %}
+                                        - {{ categoria }}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 profile-social">
+                            <div class="media pt-2">
+                                <div>
+                                    <h6 style="text-align: center; padding-left: 40px !important;">Média das avaliações</h6>
+                                    <div class="rating" style="padding-left: 55px !important;">
+                                        <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
+                                        <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
+                                        <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
+                                        <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true" style="padding-right: 7px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="my-2 p-2 bg-white rounded box-shadow">
+                                    <div class="float-left" style="width:35px; line-height:1;">
+                                        <div style="height:9px; margin:5px 0;">5
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="float-left" style="width:180px;">
+                                        <div class="progress" style="height:9px; margin:8px 0;">
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 100%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="float-left" style="margin-left:10px;">1</div>
+                                </div>
+                            <div class="my-2 p-2 bg-white rounded box-shadow">
+                                <div class="float-left" style="width:35px; line-height:1;">
+                                    <div style="height:9px; margin:5px 0;">4
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="float-left" style="width:180px;">
+                                    <div class="progress" style="height:9px; margin:8px 0;">
+                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 80%">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="float-left" style="margin-left:10px;">1</div>
+                            </div>
+                            <div class="my-2 p-2 bg-white rounded box-shadow">
+                                <div class="float-left" style="width:35px; line-height:1;">
+                                    <div style="height:9px; margin:5px 0;">3
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="float-left" style="width:180px;">
+                                    <div class="progress" style="height:9px; margin:8px 0;">
+                                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 60%">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="float-left" style="margin-left:10px;">1</div>
+                            </div>
+                            <div class="my-2 p-2 bg-white rounded box-shadow">
+                                <div class="float-left" style="width:35px; line-height:1;">
+                                    <div style="height:9px; margin:5px 0;">2
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="float-left" style="width:180px;">
+                                    <div class="progress" style="height:9px; margin:8px 0;">
+                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 40%">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="float-left" style="margin-left:10px;">1</div>
+                            </div>
+                            <div class="my-2 p-2 bg-white rounded box-shadow">
+                                <div class="float-left" style="width:35px; line-height:1;">
+                                    <div style="height:9px; margin:5px 0;">1
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="float-left" style="width:180px;">
+                                    <div class="progress" style="height:9px; margin:8px 0;">
+                                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 20%">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="float-left" style="margin-left:10px;">87</div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                        <h2 style="text-align: center">Avaliações</h2>
+                    <div>
+                    <div class="my-3 p-3 bg-white rounded box-shadow">
+                        <div class="media pt-3">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32" height="32">
+                            <p class="media-body pb-3 mb-0 small lh-125 col-sm-3">
+                                <strong class=" text-gray-dark">Usuário: </strong>Nome
+                                <strong class="d-block text-gray-dark">Data: </strong>25/09/1992
+                            </p>
+                            <div class="col-sm-9">
+                                <div class="rating" >
+                                    <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
+                                    <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
+                                    <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
+                                    <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true" style="padding-right: 7px"></i>
+                                </div>
+                                <div class="review-block-title">this was nice in buy</div>
+                                <div class="review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-</html>
+{% endblock container %}
+
+
+					<!-- <h2 class="bold padding-bottom-7">4.3 <small>/ 5</small></h2>
+					<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+					  <i class="fa fa-star" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+					  <i class="fa fa-star" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+					  <i class="fa fa-star" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+					 <i class="fa fa-star" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+					  <i class="fa fa-star" aria-hidden="true"></i>
+					</button> -->
