@@ -48,3 +48,19 @@ class Prestador(models.Model):
     def get_categorias(self):
         categorias = Categoria.objects.filter(prestador=self)
         return categorias
+
+    def get_status(self):
+        status = {}
+        if self.user.is_active:
+            status = {
+                'icone': 'fa fa-check-circle',
+                'status': 'Perfil ativo',
+                'color': 'green'
+            }
+        else:
+            status = {
+                'icone': 'fa fa-times-circle',
+                'status': 'Perfil desativado',
+                'color': 'red'
+            }
+        return status

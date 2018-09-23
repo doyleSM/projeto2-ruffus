@@ -14,43 +14,22 @@
             <div class="col-lg-3 col-md-4 col-sm-4">
                 <div class="main-box clearfix">
                     <h2>{{ perfil.user.get_full_name }}</h2>
-                    <div class="profile-status">
-                        <i class="fa fa-check-circle"></i> Online
+                    <div class="profile-status" style="color: {{ perfil.get_status.color }}">
+                        <i class="{{ perfil.get_status.icone }}"></i> {{ perfil.get_status.status }}
                     </div>
                     <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="profile-img img-responsive center-block">
-                    <div class="profile-label">
-                        <span class="label label-danger">
-                            {% for categoria in perfil.get_categorias %}
-                                {{ categoria }}
-                            {% endfor %}
-                        </span>
-                    </div>
-                    <div class="profile-stars">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <span>Super User</span>
-                    </div>
+
 
                     <div class="profile-since">
-                        Membro desde: {{ perfil.data_cadastro }}
+                        Membro desde:<br>{{ perfil.data_cadastro }}
                     </div>
 
                     <div class="profile-details">
                         <ul class="fa-ul">
-                            <li><i class="fa-li fa fa-truck"></i>Orders: <span>456</span></li>
-                            <li><i class="fa-li fa fa-comment"></i>Posts: <span>828</span></li>
-                            <li><i class="fa-li fa fa-tasks"></i>Tasks done: <span>1024</span></li>
+                            <li><i class="fa-li fa fa-tasks"></i>Serviços realizados: <span>10</span></li>
                         </ul>
                     </div>
-
-                    <div class="profile-message-btn center-block text-center">
-                        <a href="#" class="btn btn-success">
-                            <i class="fa fa-envelope"></i> Send message
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
             <div class="col-lg-8 col-md-7 col-sm-7">
@@ -102,11 +81,11 @@
                                 <div>
                                     <h6 style="text-align: center; padding-left: 40px !important;">Média das avaliações</h6>
                                     <div class="rating" style="padding-left: 55px !important;">
-                                        <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
-                                        <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
-                                        <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
-                                        <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true" style="padding-right: 7px"></i>
+                                        <i class="fa fa-star profile-stars" aria-hidden="true" style="padding-right: 7px"></i>
+                                        <i class="fa fa-star profile-stars" aria-hidden="true" style="padding-right: 7px"></i>
+                                        <i class="fa fa-star profile-stars" aria-hidden="true" style="padding-right: 7px"></i>
+                                        <i class="fa fa-star profile-stars" aria-hidden="true" style="padding-right: 7px"></i>
+                                        <i class="fa fa-star-o profile-stars" aria-hidden="true" style="padding-right: 7px"></i>
                                     </div>
                                 </div>
                             </div>
@@ -197,11 +176,11 @@
                             </p>
                             <div class="col-sm-9">
                                 <div class="rating" >
-                                    <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
-                                    <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
-                                    <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
-                                    <i class="fa fa-star" aria-hidden="true" style="padding-right: 7px"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true" style="padding-right: 7px"></i>
+                                    <i class="fa fa-star profile-stars" aria-hidden="true" style="padding-right: 7px"></i>
+                                    <i class="fa fa-star profile-stars" aria-hidden="true" style="padding-right: 7px"></i>
+                                    <i class="fa fa-star profile-stars" aria-hidden="true" style="padding-right: 7px"></i>
+                                    <i class="fa fa-star profile-stars" aria-hidden="true" style="padding-right: 7px"></i>
+                                    <i class="fa fa-star-o profile-stars" aria-hidden="true" style="padding-right: 7px"></i>
                                 </div>
                                 <div class="review-block-title">this was nice in buy</div>
                                 <div class="review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>

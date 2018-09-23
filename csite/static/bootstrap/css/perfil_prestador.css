@@ -24,7 +24,6 @@ h3 > span {
 	padding-left: 12px;
 	margin-top: -10px;
 	padding-bottom: 10px;
-	color: #8dc859;
 }
 #user-profile .profile-status.offline {
 	color: #fe635f;
@@ -43,10 +42,8 @@ h3 > span {
 	padding: 5px 15px;
 	font-size: 1em;
 }
-#user-profile .profile-stars {
+.profile-stars {
 	color: #FABA03;
-	padding: 7px 0;
-	text-align: center;
 }
 #user-profile .profile-stars > i {
 	margin-left: -2px;
@@ -75,7 +72,7 @@ h3 > span {
 	padding-top: 2px;
 }
 #user-profile .profile-details ul > li > span {
-	color: #34d1be;
+	color: #1489d1;
 }
 #user-profile .profile-header {
 	position: relative;
