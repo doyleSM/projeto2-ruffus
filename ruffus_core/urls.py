@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from csite.views import index
 from catalogo.views import lista_servicos
 
 
@@ -25,5 +24,5 @@ urlpatterns = [
     path('catalogo/', include('catalogo.urls', namespace='catalogo')),
     path('usuarios/', include('usuarios.urls', namespace='usuarios')),
     path('orcamentos/', include('orcamentos.urls', namespace='orcamentos')),
-
+    path('perfis/', include('perfis.urls', namespace='perfis')),
 ]
