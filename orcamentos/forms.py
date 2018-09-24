@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from .models import Solicitacao, Orcamento
 from usuarios.models import Endereco
 
+
 class SolicitacaoForm(ModelForm):
 
     class Meta:

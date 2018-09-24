@@ -63,6 +63,7 @@ class Orcamento(models.Model):
     descartar = models.BooleanField(default=False)
     descricao = models.TextField('Descrição')
     valor = models.DecimalField('Valor', decimal_places=2, max_digits=10)
+    avaliado = models.BooleanField(default=False)
 
     def __str__(self):
         return self.prestador.user.get_full_name() + ' - ' + str(self.valor)
