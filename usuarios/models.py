@@ -27,7 +27,7 @@ class Cliente(models.Model):
     CPF = models.CharField('CPF', max_length=15)
 
     def __str__(self):
-        return self.user.username
+        return self.user.get_full_name()
 
 
 class Prestador(models.Model):
@@ -39,7 +39,7 @@ class Prestador(models.Model):
     categorias = models.ManyToManyField(Categoria, blank=True)
 
     def __str__(self):
-        return self.user.username
+        return self.user.get_full_name()
 
     class Meta:
         verbose_name_plural = 'Prestadores'

@@ -117,9 +117,8 @@ def aceitarOrcamento(request, orcamentopk, solicitacaopk):
                 return redirect('orcamentos:orcamentos_solicitacoes', solicitacaopk)
             else:
                 solicitacao.status = 1
+                solicitacao.orcamento_aceito = orcamento
                 solicitacao.save()
-                orcamento.aceito = True
-                orcamento.save()
                 messages.success(request, 'Orçamento aceito com sucesso!')
                 return redirect('orcamentos:orcamentos_solicitacoes', solicitacaopk)
 

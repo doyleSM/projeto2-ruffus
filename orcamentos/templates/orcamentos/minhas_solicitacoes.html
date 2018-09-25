@@ -25,6 +25,9 @@
                                 <strong>Status:</strong> <strong style="color: {{ solicitacao.get_color }}"> {{ solicitacao.get_status_display }} </strong><i style="color: {{ solicitacao.get_color }}" class="{{ solicitacao.get_icon }}" aria-hidden="true"></i>
                             <!-- <i class="fa fa-check-square" aria-hidden="true"></i> -->
                         </strong>
+                        {% if solicitacao.status == 3 or solicitacao.status == 5 %}
+                            <a href="{% url 'avaliacoes:avaliar' solicitacao.orcamento_aceito.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary" style="float: right; margin-right: 10px">Avaliar</button></a>
+                        {% endif %}
                                 <strong class="d-block">Endereco</strong>{{ solicitacao.endereco }}
                                 <strong class="d-block">Hora solicitação</strong>{{ solicitacao.hora_solicitacao }}
                                 <strong class="d-block"> Descrição</strong>{{ solicitacao.descricao }}

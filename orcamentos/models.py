@@ -22,6 +22,8 @@ class Solicitacao(models.Model):
     descricao = models.TextField('Descricao')
     hora_solicitacao = models.DateTimeField(auto_now_add=True)
     hora_aceitacao = models.DateTimeField(auto_now=True)
+    orcamento_aceito = models.ForeignKey('orcamentos.Orcamento',related_name='orcamento_aceito', on_delete=models.CASCADE, null=True, blank=True)
+    avaliado = models.BooleanField(default=False)
 
     def __str__(self):
         return self.servico.nome
@@ -59,11 +61,9 @@ class Orcamento(models.Model):
 
     prestador = models.ForeignKey(Prestador, on_delete=models.CASCADE)
     solicitacao = models.ForeignKey(Solicitacao, on_delete=models.CASCADE)
-    aceito = models.BooleanField(default=False)
     descartar = models.BooleanField(default=False)
     descricao = models.TextField('Descrição')
     valor = models.DecimalField('Valor', decimal_places=2, max_digits=10)
-    avaliado = models.BooleanField(default=False)
 
     def __str__(self):
         return self.prestador.user.get_full_name() + ' - ' + str(self.valor)

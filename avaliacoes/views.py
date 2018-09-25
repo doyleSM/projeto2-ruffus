@@ -20,18 +20,20 @@ class AvaliacaoView(CreateView):
             messages.error(self.request, 'Você nao pode avaliar essa solicitacao')
             return redirect('index')
 
-        if orcamento.solicitacao.status != 3 or orcamento.solicitacao.status != 5:
-            messages.error(self.request, ('Orcamento só pode ser avaliado se a solicitacao estiver concluida ou cancelada pelo prestador'))
+        if orcamento.solicitacao.status not in [3, 5]:
+            messages.error(self.request, 'Orcamento só pode ser avaliado se a solicitacao estiver concluida ou cancelada pelo prestador')
             return redirect('index')
 
-        if orcamento.avaliado:
-            messages.warning(self.request, 'Orçamento já avaliado')
+
+        if orcamento.solicitacao.avaliado:
+            messages.warning(self.request, 'Serviço já avaliado')
             return redirect('index')
 
         form.instance.orcamento = orcamento
         form.instance.usuario = Cliente.objects.get(user=self.request.user)
-        form.instance.avaliado = True
         form.save()
+        orcamento.solicitacao.avaliado = True
+        orcamento.solicitacao.save()
 
         return redirect(self.get_success_url())
 

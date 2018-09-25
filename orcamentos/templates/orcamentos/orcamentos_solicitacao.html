@@ -19,11 +19,11 @@
                         <div class="media pt-3">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32" height="32">
                             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                                <strong class=" text-gray-dark">Prestador: </strong>{{ orcamento.prestador }}
+                                <strong class=" text-gray-dark">Prestador: </strong> <a href="{% url 'perfis:prefil_prestador' orcamento.prestador.pk %}"> {{ orcamento.prestador }} </a>
                                 <strong class="d-block text-gray-dark">Descrição: </strong>{{ orcamento.descricao }}
                             </p>
                             <span class="badge  badge-warning">R$ {{ orcamento.valor }}</span>
-                            {% if orcamento.aceito == True %}<span class="badge badge-success">Aceito</span>{% endif %}
+                            {% if orcamento.solicitacao.orcamento_aceito == orcamento %}<span class="badge badge-success">Aceito</span>{% endif %}
                         </div>
                         <a href="{% url 'orcamentos:aceitar-orcamento' orcamento.pk orcamento.solicitacao.pk %}"><button type="button" class="btn btn-sm btn-outline-success">Aceitar</button></a>
                         <a href="{% url 'orcamentos:descartar-orcamento' orcamento.pk %}"> <button type="button" class="btn btn-sm btn-outline-danger">Descartar</button></a>
@@ -43,13 +43,11 @@
                     <div class="media pt-3">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32" height="32">
                             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                            <strong class=" text-gray-dark">Prestador: </strong>{{ orcamento.prestador }}
+                            <strong class=" text-gray-dark">Prestador: </strong> <a href="{% url 'perfis:prefil_prestador' orcamento.prestador.pk %}"> {{ orcamento.prestador }} </a>
                             <strong class="d-block text-gray-dark">Descrição: </strong>{{ orcamento.descricao }}
                                 <br>
                             <span class="badge  badge-warning">R$ {{ orcamento.valor }}</span>
                             <a href="{% url 'orcamentos:restaurar-orcamento' orcamento.pk %}"> <div class="btn btn-outline-secondary btn-sm"> Restaurar</div></a>
-
-
                     </div>
                 {% endif %}
         {% endfor %}
