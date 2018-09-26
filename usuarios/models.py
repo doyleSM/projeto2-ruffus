@@ -11,7 +11,7 @@ class User(AbstractUser):
 
 class Endereco(models.Model):
 
-    nome_rua = models.CharField('Rua', max_length=50 )
+    nome_rua = models.CharField('Rua', max_length=50)
     complemento = models.CharField('Complemento', max_length=30, null=True, blank=True)
     bairro = models.CharField('Bairro', max_length=50)
     CEP = models.CharField('CEP', max_length=15)
@@ -64,3 +64,4 @@ class Prestador(models.Model):
                 'color': 'red'
             }
         return status
+
