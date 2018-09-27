@@ -195,3 +195,5 @@ class DadosPessoaisList(ListView):
         if self.request.user.is_prestador:
             return Prestador.objects.get(user=self.request.user)
         return Cliente.objects.get(user=self.request.user)
+
+

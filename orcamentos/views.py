@@ -171,20 +171,10 @@ def restaurarOrcamento(request, orcamentopk):
             messages.success(request, 'Orçamento restaurado com sucesso')
             return redirect('orcamentos:orcamentos_solicitacoes', orcamento.solicitacao.pk)
 
-'''class EnderecoEditar(UpdateView):
 
-    model = Endereco
-    form_class = EnderecoForm
-    #template_name = 'usuarios/cadastro_endereco.html'
-    success_url = reverse_lazy('usuarios:lista_enderecos')
+class OrcamentosPrestador(ListView):
+    template_name = 'orcamentos/orcamentos_dados.html'
+    context_object_name = 'orcamentos'
 
-    def get_object(self):
-        return get_object_or_404(Endereco, pk=self.kwargs['pk'], usuario=self.request.user)
-
-    def form_valid(self, form):
-        form.save()
-        return redirect(self.get_success_url())
-
-    def get_success_url(self):
-        messages.success(self.request, 'Endereco atualizado com sucesso')
-        return reverse('usuarios:lista_enderecos')'''
+    def get_queryset(self):
+        return Orcamento.objects.filter(pk=21)
