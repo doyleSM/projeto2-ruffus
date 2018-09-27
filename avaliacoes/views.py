@@ -24,7 +24,6 @@ class AvaliacaoView(CreateView):
             messages.error(self.request, 'Orcamento só pode ser avaliado se a solicitacao estiver concluida ou cancelada pelo prestador')
             return redirect('index')
 
-
         if orcamento.solicitacao.avaliado:
             messages.warning(self.request, 'Serviço já avaliado')
             return redirect('index')

@@ -12,7 +12,7 @@ class Avaliacao(models.Model):
         (4, '4'),
         (5, '5'),
     )
-    orcamento = models.ForeignKey(Orcamento, on_delete=models.CASCADE)
+    orcamento = models.OneToOneField(Orcamento, related_name='orcamento', on_delete=models.CASCADE)
     data_pub = models.DateField('data publicação', auto_now_add=True)
     usuario = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     comentario = models.CharField(max_length=200)
@@ -20,6 +20,14 @@ class Avaliacao(models.Model):
 
     def __str__(self):
         return self.orcamento.prestador.user.get_full_name() + ' - ' + str(self.nota)
+
+    def star(self):
+        avaliacao = {
+            'full': range(self.nota),
+            'empty': range(5-self.nota)
+        }
+        return avaliacao
+
 
     class Meta:
         verbose_name = 'Avaliação'
