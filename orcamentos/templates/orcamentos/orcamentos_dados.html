@@ -19,13 +19,22 @@
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32" height="32">
                         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                             <strong class=" text-gray-dark">Cliente: </strong> {{ orcamento.solicitacao.cliente }}<a href="">  </a>
+                            {% if orcamento.solicitacao.orcamento_aceito == orcamento %}
+                                <strong>Status:</strong> <strong style="color: {{ orcamento.solicitacao.get_color }}"> {{ orcamento.solicitacao.get_status_display }} </strong><i style="color: {{ orcamento.solicitacao.get_color }}" class="{{ orcamento.solicitacao.get_icon }}" aria-hidden="true"></i>
+                            {% else %}
+                                <strong>Status:</strong> <strong style="color: green"> Orçamento enviado </strong><i style="color: green" class="fa fa-clock-o" aria-hidden="true"></i>
+
+                            {% endif %}
+
                             <strong class="d-block text-gray-dark">Descrição: </strong>{{ orcamento.solicitacao.descricao }}
                             <strong class="d-block text-gray-dark">Descrição: </strong>{{ orcamento.solicitacao.endereco }}
+
                         </p>
-                        <span class="badge  badge-warning">R$ </span>
+                        <span class="badge  badge-warning"></span>
                             {% if orcamento.solicitacao.orcamento_aceito == orcamento %}<span class="badge badge-success">Aceito</span>{% endif %}
                         </div>
-                        <a href=""><button type="button" class="btn btn-sm btn-outline-success">Aceitar</button></a>
+                        <a href=""><button type="button" class="btn btn-sm btn-outline-danger">Cancelar</button></a>
+                        <a href=""><button type="button" class="btn btn-sm btn-outline-warning">Editar</button></a>
                     </div>
             {% endfor %}
         {% endif %}

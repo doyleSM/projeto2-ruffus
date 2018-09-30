@@ -177,4 +177,4 @@ class OrcamentosPrestador(ListView):
     context_object_name = 'orcamentos'
 
     def get_queryset(self):
-        return Orcamento.objects.filter(pk=21)
+        return Orcamento.objects.filter(prestador=self.request.user.prestador).order_by('solicitacao__servico__nome')
