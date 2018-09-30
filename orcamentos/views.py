@@ -178,3 +178,30 @@ class OrcamentosPrestador(ListView):
 
     def get_queryset(self):
         return Orcamento.objects.filter(prestador=self.request.user.prestador).order_by('solicitacao__servico__nome')
+
+
+def cancelarOrcamento(request, orcamentopk):
+    orcamento = Orcamento.objects.get(pk=orcamentopk)
+    try:
+        solicitacao = Solicitacao.objects.get(orcamento_aceito=orcamento)
+    except Solicitacao.DoesNotExist:
+        solicitacao = None
+
+    if orcamento.prestador != request.user.prestador:
+        messages.error(request, 'Você não tem permissão!')
+        return redirect('index')
+
+    if solicitacao is None:
+        messages.success(request, 'Orcamento cancelado com sucesso')
+        orcamento.delete()
+        return redirect('orcamentos:orcamentos-dados')
+
+    if solicitacao.status != 0:
+        messages.error(request, 'Orçamento já foi aceito, não há mais possibilidade de cancelamento')
+        messages.warning(request, 'Em paralelo estamos trabalhando para melhorar as opções de cancelamento, agradecemos a compreensão')
+        return redirect('orcamentos:orcamentos-dados')
+    else:
+        solicitacao.status = 3
+        solicitacao.save()
+        messages.success(request, 'orcamento cancelada com sucesso!')
+        return redirect('orcamentos:orcamentos-dados')

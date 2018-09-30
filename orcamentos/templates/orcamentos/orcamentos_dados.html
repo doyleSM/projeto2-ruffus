@@ -33,7 +33,7 @@
                         <span class="badge  badge-warning"></span>
                             {% if orcamento.solicitacao.orcamento_aceito == orcamento %}<span class="badge badge-success">Aceito</span>{% endif %}
                         </div>
-                        <a href=""><button type="button" class="btn btn-sm btn-outline-danger">Cancelar</button></a>
+                        <a href="{% url 'orcamentos:cancelar-orcamento' orcamento.pk %}"><button type="button" class="btn btn-sm btn-outline-danger">Cancelar</button></a>
                         <a href=""><button type="button" class="btn btn-sm btn-outline-warning">Editar</button></a>
                     </div>
             {% endfor %}
