@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Avaliacao
-from usuarios.models import Cliente
+from usuarios.models import Cliente, Prestador
 from orcamentos.models import Orcamento
 from .forms import AvaliacaoForm
 from django.views.generic import CreateView
@@ -35,6 +35,46 @@ class AvaliacaoView(CreateView):
         form.save()
         orcamento.solicitacao.avaliado = True
         orcamento.solicitacao.save()
+
+        return redirect(self.get_success_url())
+
+    #def get_context_data(self, **kwargs):
+    #    context = super(SolicitacaoView, self).get_context_data(**kwargs)
+    #    context['servico'] = Servico.objects.get(slug=self.kwargs['slug'])
+    #    return context
+
+    def get_success_url(self):
+        messages.success(self.request, 'Avaliação feita com sucesso!')
+        return reverse('index')
+
+class AvaliacaoPeloPrestador(CreateView):
+
+    model = Avaliacao
+    form_class = AvaliacaoForm
+    template_name = 'orcamentos/novo_orcamento.html'
+
+    def form_valid(self, form):
+        orcamento = Orcamento.objects.get(pk=self.kwargs['orcamentopk'])
+
+        if orcamento.solicitacao.orcamento_aceito.prestador != self.request.user.prestador:
+            messages.error(self.request, 'Você nao pode avaliar esse usuário')
+            return redirect('index')
+
+        if orcamento.solicitacao.status not in [2, 5]:
+            messages.error(self.request, 'Orcamento só pode ser avaliado se a solicitacao estiver concluida ou cancelada pelo cliente')
+            return redirect('index')
+
+        if orcamento.solicitacao.prestador_avaliou:
+            messages.warning(self.request, 'Usuario já avaliado')
+            return redirect('index')
+
+        form.instance.orcamento = orcamento
+        form.instance.usuario2 = Prestador.objects.get(user=self.request.user)
+        form.instance.prestador_avaliou = True
+        form.save()
+        orcamento.solicitacao.prestador_avaliou = True
+        orcamento.solicitacao.save()
+
 
         return redirect(self.get_success_url())
 

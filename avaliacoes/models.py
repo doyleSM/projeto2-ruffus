@@ -12,7 +12,7 @@ class Avaliacao(models.Model):
         (4, '4'),
         (5, '5'),
     )
-    orcamento = models.OneToOneField(Orcamento, related_name='orcamento', on_delete=models.CASCADE)
+    orcamento = models.ForeignKey(Orcamento, related_name='orcamento', on_delete=models.CASCADE)
     data_pub = models.DateField('data publicação', auto_now_add=True)
     usuario = models.ForeignKey(Cliente, on_delete=models.CASCADE, blank=True, null=True)
     comentario = models.CharField(max_length=200)

@@ -24,7 +24,7 @@ class Solicitacao(models.Model):
     hora_aceitacao = models.DateTimeField(auto_now=True)
     orcamento_aceito = models.OneToOneField('orcamentos.Orcamento',related_name='orcamento_aceito', on_delete=models.CASCADE, null=True, blank=True)
     avaliado = models.BooleanField(default=False)
-    avaliado_pelo_prestador = models.BooleanField(default=False)
+    prestador_avaliou = models.BooleanField(default=False)
 
     def __str__(self):
         return self.servico.nome

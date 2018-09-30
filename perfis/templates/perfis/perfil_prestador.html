@@ -174,7 +174,7 @@
                             <div class="media pt-3">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32" height="32">
                                 <p class="media-body pb-3 mb-0 small lh-125 col-sm-5">
-                                    <strong class=" text-gray-dark">Usuário: </strong><a href="{% url 'perfis:perfil_cliente' avaliacao.usuario.pk %}"> {{ avaliacao.usuario }}</a>
+                                    <strong class=" text-gray-dark">Usuário: </strong><a href="{% url 'perfis:perfil_cliente' avaliacao.usuario_id %}"> {{ avaliacao.usuario }}</a>
                                     <strong class="d-block text-gray-dark">Data: </strong>{{ avaliacao.data_pub }}
                                 </p>
                                 <div class="col-sm-3">
