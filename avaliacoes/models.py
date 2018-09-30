@@ -28,7 +28,6 @@ class Avaliacao(models.Model):
         }
         return avaliacao
 
-
     class Meta:
         verbose_name = 'Avaliação'
         verbose_name_plural = 'Avaliações'

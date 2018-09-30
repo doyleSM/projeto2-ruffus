@@ -7,6 +7,8 @@ from django.views.generic import CreateView
 from django.contrib import messages
 from django.urls import reverse
 # Create your views here.
+
+
 class AvaliacaoView(CreateView):
 
     model = Avaliacao
