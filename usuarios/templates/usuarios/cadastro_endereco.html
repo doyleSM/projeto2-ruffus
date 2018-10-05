@@ -20,8 +20,11 @@
                     </div>
                 </div>
             {% endfor %}
-            <button class="btn btn-success align-right" type="submit">Salvar</button>
+            <button style="float: right" class="btn btn-success align-right" type="submit">Salvar</button>
+            <a style="float: right; margin-right: 5px !important;" href="{% url 'usuarios:lista_enderecos' %}"><button type="button" class="btn btn-secondary">Cancelar</button></a>
+
         </fieldset>
     </form>
+
 
 {% endblock %}

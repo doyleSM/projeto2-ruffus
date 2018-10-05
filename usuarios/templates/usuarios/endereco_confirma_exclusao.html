@@ -4,12 +4,13 @@
 
 {% block conta %}
 
-
     <h3 class="pull-right mb-4">Excluir endereço</h3>
-<form method="post" style="padding-top: 80px">{% csrf_token %}
-    <div class="alert alert-warning">
-        <p>Você tem certeza que quer apagar <strong>"{{ object }}</strong>"?</p>
+<form method="post" style="padding-top: 80px ; margin-left: -80px !important;">{% csrf_token %}
+    <div class="alert alert-danger">
+        <p style="color: red;">Você tem certeza que quer apagar <strong>"{{ object }}</strong>"?</p>
     </div>
-    <button class="btn btn-danger" type="submit">Sim, apagar</button>
+    <button style="float: right" class="btn btn-danger" type="submit">Sim, apagar</button>
+    <a style="float: right; padding-right: 5px" href="{% url 'usuarios:lista_enderecos' %}"><button type="button" class="btn btn-secondary">Cancelar</button> </a>
+
 </form>
 {% endblock %}
