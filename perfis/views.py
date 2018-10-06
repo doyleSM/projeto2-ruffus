@@ -1,9 +1,13 @@
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 from usuarios.models import Prestador, Cliente
 from django.views.generic import ListView
 from orcamentos.models import Solicitacao
 from avaliacoes.models import Avaliacao
 # Create your views here.
 
+@method_decorator([login_required(login_url='usuarios:login')], name='dispatch')
 class PerfilPrestador(ListView):
 
     template_name = 'perfis/perfil_prestador.html'
@@ -58,6 +62,7 @@ class PerfilPrestador(ListView):
         return Prestador.objects.get(pk=self.kwargs['pk'])
 
 
+@method_decorator([login_required(login_url='usuarios:login')], name='dispatch')
 class PerfilCliente(ListView):
 
     template_name = 'perfis/perfil_cliente.html'

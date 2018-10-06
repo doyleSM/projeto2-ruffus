@@ -1,24 +1,27 @@
 {% load static %}
 {% load widget_tweaks %}
+  <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+<div class="container">
+        <form class="form-horizontal" method='post' style="padding-top: 80px">
+            {% csrf_token %}
 
-    <form class="form-horizontal" method='post' style="padding-top: 80px">
-        {% csrf_token %}
-
-        <fieldset>
-            {% for field in form %}
-                <div class="form-group {% if field.errors %} has-error{% endif %}">
-                    <label for="{{ field.auto_id }}" class="col-sm-6 sr-only"> {{field.label }}</label>
-                    <div class="">
-                        {% render_field field class="form-control" placeholder=field.label  %}
-                        {% for error in field.errors %}
-                            <div class="alert alert-danger">
-                                <span class="help-block"> {{ error }}</span>
-                            </div>
-                        {% endfor %}
+            <fieldset>
+                {% for field in form %}
+                    <div class="form-group {% if field.errors %} has-error{% endif %}">
+                        <label for="{{ field.auto_id }}" class="col-sm-6 sr-only"> {{field.label }}</label>
+                        <div class="">
+                            {% render_field field class="form-control" placeholder=field.label  %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    <span class="help-block"> {{ error }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-       </fieldset>
-        <button class="btn btn-success align-right" type="submit">Avaliar</button>
+                {% endfor %}
+           </fieldset>
+            <button class="btn btn-success" style="float: right" type="submit">Avaliar</button>
+            <a href="{% url 'usuarios:solicitacoes_cliente' %}"><button class="btn btn-secondary "  style="float: right;margin-right: 5px   " type="button">Cancelar</button></a>
 
-    </form>
+        </form>
+</div>

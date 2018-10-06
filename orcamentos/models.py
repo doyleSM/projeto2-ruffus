@@ -18,7 +18,7 @@ class Solicitacao(models.Model):
     cliente = models.ForeignKey('usuarios.Cliente', related_name='Cliente', on_delete=models.CASCADE)
     servico = models.ForeignKey('catalogo.Servico', on_delete=models.CASCADE)
     status = models.IntegerField('Status', choices=SOLICITACAO_STATUS, default=0)
-    endereco = models.ForeignKey('usuarios.Endereco', verbose_name='Endereço', on_delete=models.CASCADE)
+    endereco = models.ForeignKey('usuarios.Endereco', default='', verbose_name='Endereço', on_delete=models.CASCADE, null=False, blank=False)
     descricao = models.TextField('Descricao')
     hora_solicitacao = models.DateTimeField(auto_now_add=True)
     hora_aceitacao = models.DateTimeField(auto_now=True)

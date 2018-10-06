@@ -89,6 +89,7 @@ class SolicitacoesAbertasListView(ListView):
         return Solicitacao.objects.filter(servico__categoria__in=categorias, status=0)
 
 
+@method_decorator([cliente_required(login_url='usuarios:login')], name='dispatch')
 class OrcamentosListViewSolicitacoes(ListView):
     template_name = 'orcamentos/orcamentos_solicitacao.html'
     context_object_name = 'orcamentos'
@@ -104,6 +105,7 @@ class OrcamentosListViewSolicitacoes(ListView):
         return Orcamento.objects.filter(solicitacao_id=self.kwargs['pk'])
 
 
+@cliente_required(login_url='usuarios:login')
 def aceitarOrcamento(request, orcamentopk, solicitacaopk):
 
         orcamento = Orcamento.objects.get(pk=orcamentopk)
@@ -123,6 +125,7 @@ def aceitarOrcamento(request, orcamentopk, solicitacaopk):
                 return redirect('orcamentos:orcamentos_solicitacoes', solicitacaopk)
 
 
+@cliente_required(login_url='usuarios:login')
 def cancelarSolicitacao(request, solicitacaopk):
     solicitacao = Solicitacao.objects.get(pk=solicitacaopk)
     if solicitacao.cliente.user != request.user:
@@ -140,6 +143,7 @@ def cancelarSolicitacao(request, solicitacaopk):
             return redirect('usuarios:solicitacoes_cliente')
 
 
+@cliente_required(login_url='usuarios:login')
 def descartarOrcamento(request, orcamentopk):
     orcamento = Orcamento.objects.get(pk=orcamentopk)
     if orcamento.solicitacao.cliente != request.user.cliente:
@@ -156,6 +160,7 @@ def descartarOrcamento(request, orcamentopk):
             return redirect('orcamentos:orcamentos_solicitacoes', orcamento.solicitacao.pk)
 
 
+@cliente_required(login_url='usuarios:login')
 def restaurarOrcamento(request, orcamentopk):
     orcamento = Orcamento.objects.get(pk=orcamentopk)
     if orcamento.solicitacao.cliente != request.user.cliente:
@@ -172,6 +177,7 @@ def restaurarOrcamento(request, orcamentopk):
             return redirect('orcamentos:orcamentos_solicitacoes', orcamento.solicitacao.pk)
 
 
+@method_decorator([prestador_required(login_url='usuarios:login')], name='dispatch')
 class OrcamentosPrestador(ListView):
     template_name = 'orcamentos/orcamentos_dados.html'
     context_object_name = 'orcamentos'
@@ -180,6 +186,7 @@ class OrcamentosPrestador(ListView):
         return Orcamento.objects.filter(prestador=self.request.user.prestador).order_by('solicitacao__servico__nome')
 
 
+@prestador_required(login_url='usuarios:login')
 def cancelarOrcamento(request, orcamentopk):
     orcamento = Orcamento.objects.get(pk=orcamentopk)
     try:

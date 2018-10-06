@@ -21,7 +21,6 @@
 </head>
 
 <body style="background-color: #ecf0f1;">
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mynav">
   <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
         <ul class="navbar-nav ml-auto">
@@ -70,15 +69,13 @@
         </ul>
     </div>
 </nav>
-    {% block messages %}
-        <div>
+ {% block messages %}
           {% for message in messages %}
-          <div class="alert alert-{{message.tags}} alert-dismissable" style="width: 100%; float:right; text-align: center;">
+          <div class="alert alert-{{message.tags}} alert-dismissable" style="width: 100%; text-align: center;">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <strong>{{message}}</strong>
           </div>
           {% endfor %}
-        </div>
     {% endblock messages %}
 <div class="container">
     {% block container %}

@@ -1,4 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
+
 from .models import Avaliacao
 from usuarios.models import Cliente, Prestador
 from orcamentos.models import Orcamento
@@ -7,13 +10,15 @@ from django.views.generic import CreateView
 from django.contrib import messages
 from django.urls import reverse
 # Create your views here.
+from usuarios.decorators import cliente_required, prestador_required
 
 
+@method_decorator([cliente_required(login_url='usuarios:login')], name='dispatch')
 class AvaliacaoView(CreateView):
 
     model = Avaliacao
     form_class = AvaliacaoForm
-    template_name = 'orcamentos/novo_orcamento.html'
+    template_name = 'avaliacoes/nova_avaliacao.html'
 
     def form_valid(self, form):
         orcamento = Orcamento.objects.get(pk=self.kwargs['orcamentopk'])
@@ -24,11 +29,11 @@ class AvaliacaoView(CreateView):
 
         if orcamento.solicitacao.status not in [3, 5]:
             messages.error(self.request, 'Orcamento só pode ser avaliado se a solicitacao estiver concluida ou cancelada pelo prestador')
-            return redirect('index')
+            return redirect('usuarios:solicitacoes_cliente')
 
         if orcamento.solicitacao.avaliado:
             messages.warning(self.request, 'Serviço já avaliado')
-            return redirect('index')
+            return redirect('perfis:prefil_prestador', orcamento.solicitacao.orcamento_aceito.prestador_id)
 
         form.instance.orcamento = orcamento
         form.instance.usuario = Cliente.objects.get(user=self.request.user)
@@ -36,22 +41,24 @@ class AvaliacaoView(CreateView):
         orcamento.solicitacao.avaliado = True
         orcamento.solicitacao.save()
 
-        return redirect(self.get_success_url())
+        return redirect(self.get_success_url(orcamento.solicitacao.orcamento_aceito.pk))
 
     #def get_context_data(self, **kwargs):
     #    context = super(SolicitacaoView, self).get_context_data(**kwargs)
     #    context['servico'] = Servico.objects.get(slug=self.kwargs['slug'])
     #    return context
 
-    def get_success_url(self):
+    def get_success_url(self, pk):
         messages.success(self.request, 'Avaliação feita com sucesso!')
-        return reverse('index')
+        return redirect('perfis:prefil_prestador',pk)
 
+
+@method_decorator([prestador_required(login_url='usuarios:login')], name='dispatch')
 class AvaliacaoPeloPrestador(CreateView):
 
     model = Avaliacao
     form_class = AvaliacaoForm
-    template_name = 'orcamentos/novo_orcamento.html'
+    template_name = 'avaliacoes/nova_avaliacao.html'
 
     def form_valid(self, form):
         orcamento = Orcamento.objects.get(pk=self.kwargs['orcamentopk'])

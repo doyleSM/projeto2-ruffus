@@ -1,8 +1,10 @@
 # -*- coding: utf 8 -*-
 
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
 from django.views import generic
 from .models import Servico, Categoria
+from usuarios.decorators import cliente_required
 
 
 class ListaServicosView(generic.ListView):
@@ -34,6 +36,7 @@ class ListaPorCategoriaView(generic.ListView):
 lista_por_categoria = ListaPorCategoriaView.as_view()
 
 
+@method_decorator([cliente_required(login_url='usuarios:login')], name='dispatch')
 class DetalheServicoView(generic.ListView):
 
     template_name = 'catalogo/detalhe_servico.html'

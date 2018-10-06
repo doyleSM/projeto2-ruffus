@@ -10,10 +10,11 @@ class SolicitacaoForm(ModelForm):
         model = Solicitacao
         fields = ['descricao', 'endereco']
         widgets = {
-            'descricao': Textarea(attrs={'cols': 40, 'rows': 7}),
+            'descricao': Textarea(attrs={'cols': 40, 'rows': 5, }),
         }
         labels = {
-            'descricao': _('Descrição'),
+            'descricao': _('Descreva o que você precisa'),
+
         }
 
     def __init__(self, user, *args, **kwargs):

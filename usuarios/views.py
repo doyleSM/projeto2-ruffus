@@ -78,7 +78,7 @@ class PrestadorCategoriasView(UpdateView):
 
 '''VIEWS COMUM DOS DOIS'''
 
-
+@login_required()
 def logout_view(request):
     logout(request)
     messages.success(request, 'Desconectado com sucesso!')
@@ -182,7 +182,7 @@ class EnderecoDeletar(DeleteView):
         return get_object_or_404(Endereco, pk=self.kwargs['pk'], usuario=self.request.user)
 
     def get_success_url(self):
-        messages.warning(self.request, 'Endereco removido com sucesso')
+        messages.success(self.request, 'Endereco removido com sucesso')
         return reverse('usuarios:lista_enderecos')
 
 

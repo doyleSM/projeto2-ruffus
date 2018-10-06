@@ -16,7 +16,7 @@ class Avaliacao(models.Model):
     data_pub = models.DateField('data publicação', auto_now_add=True)
     usuario = models.ForeignKey(Cliente, on_delete=models.CASCADE, blank=True, null=True)
     comentario = models.CharField(max_length=200)
-    nota = models.IntegerField(choices=NOTA_CHOICES)
+    nota = models.IntegerField(choices=NOTA_CHOICES, default='')
     usuario2 = models.ForeignKey(Prestador, on_delete=models.CASCADE, blank=True, null=True)
     prestador_avaliou = models.BooleanField(default=False)
 

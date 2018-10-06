@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AvaliacaoView,AvaliacaoPeloPrestador
+from .views import AvaliacaoView, AvaliacaoPeloPrestador
 
 app_name = 'avaliacoes'
 urlpatterns = [
