@@ -20,6 +20,7 @@ class SolicitacaoForm(ModelForm):
         super(SolicitacaoForm, self).__init__(*args, **kwargs)
         self.fields['endereco'].queryset = Endereco.objects.filter(usuario=user)
 
+
 class OrcamentoForm(ModelForm):
 
     class Meta:

@@ -11,15 +11,9 @@
 
     <div  style="margin-top: 15px;">
         <article class="card-body mx-auto" style="max-width: 400px;">
-	        <h4 class="card-title mt-3 text-center">Cria uma conta</h4>
+	        <h4 class="card-title mt-3 text-center">Crie uma conta</h4>
 	        <p class="text-center">Comece com sua conta gratuita</p>
-	        <p>
-		        <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Entrar com Twitter</a>
-		        <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Entrar com facebook</a>
-	        </p>
-	        <p class="divider-text">
-                <span class="bg-light">OU</span>
-            </p>
+
 	        <form method="post">
                 {% csrf_token %}
                  <div class="form-group input-group">
@@ -27,7 +21,7 @@
 		            <div class="input-group-prepend">
 		                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 		            </div>
-                    {% render_field form.username class="form-control" placeholder='Username' %}
+                    {% render_field form.username class="form-control" placeholder='Nome de usuário' %}
                 </div> <!-- form-group// -->
 	            <div class="form-group input-group">
                     <p class="help-block"><small>{{ form.first_name.errors }}</small></p>
@@ -54,7 +48,7 @@
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                          {{ form.CPF.errors }}
-                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                        <span class="input-group-text"> <i class="fas fa-id-card"></i> </span>
                      </div>
                      {% render_field form.CPF class="form-control" placeholder='CPF' %}
                 </div> <!-- form-group// -->
@@ -80,7 +74,7 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block"> Criar Conta  </button>
                 </div> <!-- form-group// -->
-                <p class="text-center">Já possui uma conta? <a href="">Entrar</a> </p>
+                <p class="text-center">Já possui uma conta? <a href="{% url 'usuarios:login' %}">Entrar</a> </p>
             </form>
         </article>
     </div> <!-- card.// -->

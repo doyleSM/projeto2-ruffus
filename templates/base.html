@@ -21,10 +21,10 @@
 </head>
 
 <body style="background-color: #ecf0f1;">
-  
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mynav">
-    <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
-        <ul class="navbar-nav ml-auto text-center">
+  <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'index' %}">Início</a>
             </li>
@@ -43,14 +43,6 @@
                 </li>
             {% endif %}
         </ul>
-    </div>
-    <div class="mx-auto my-2 order-0 order-md-1 position-relative">
-        <a class="mx-auto" href="{% url 'index' %}">
-            <img src="{% static 'img/logo.png' %}" width="80" height="80" class="rounded-circle logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-            <span class="navbar-toggler-icon"></span>
-        </button>
     </div>
     <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
         <ul class="navbar-nav mr-auto text-center">

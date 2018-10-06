@@ -7,7 +7,7 @@
     <form class="form-horizontal" method='post' style="padding-top: 80px">
         {% csrf_token %}
         <fieldset>
-            {% for field in form %}
+   {% for field in form %}
                 <div class="form-group {% if field.errors %} has-error{% endif %}">
                     <label for="{{ field.auto_id }}" class="col-sm-6 sr-only"> {{field.label }}</label>
                     <div class="">
@@ -20,6 +20,9 @@
                     </div>
                 </div>
             {% endfor %}
+
+       </fieldset>
+
             <button style="float: right" class="btn btn-success align-right" type="submit">Salvar</button>
             <a style="float: right; margin-right: 5px !important;" href="{% url 'usuarios:lista_enderecos' %}"><button type="button" class="btn btn-secondary">Cancelar</button></a>
 

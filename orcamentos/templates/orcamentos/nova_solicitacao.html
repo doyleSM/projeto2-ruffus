@@ -3,23 +3,26 @@
 {% load widget_tweaks %}
 
 {% block solicitacao %}
-    <form class="form-horizontal" method='post' style="padding-top: 80px">
+    <hr>
+    <form class="form-horizontal" method='post' style="padding-top: 10px">
         {% csrf_token %}
-
         <fieldset>
-            {% for field in form %}
-                <div class="form-group {% if field.errors %} has-error{% endif %}">
-                    <label for="{{ field.auto_id }}" class="col-sm-6 sr-only"> {{field.label }}</label>
-                    <div class="">
-                        {% render_field field class="form-control" placeholder=field.label  %}
-                        {% for error in field.errors %}
-                            <div class="alert alert-danger">
-                                <span class="help-block"> {{ error }}</span>
-                            </div>
-                        {% endfor %}
-                    </div>
+        <label>Descrição</label>
+            <div class="form-group ">
+                <div class="">
+                    <textarea name="descricao" id="id_descricao" required placeholder="Descreva o que você precisa" class="form-control" cols="40" rows="5"></textarea>
                 </div>
-            {% endfor %}
+            </div>
+        <label>Endereço</label>
+        <div class="form-group ">
+            <select class="form-control" required>
+                {% for e in form.endereco %}
+                    <option value="{{e}}"></option>
+                 {% endfor %}
+            </select>
+            <div class="alert-warning" style="color: red">{{ form.endereco.errors }}</div>
+
+        </div>
        </fieldset>
         <button class="btn btn-success align-right" type="submit">Solicitar</button>
     <a style="float: right" href="{% url 'usuarios:cadastro_endereco' %}">

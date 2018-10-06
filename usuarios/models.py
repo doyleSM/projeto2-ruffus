@@ -49,7 +49,7 @@ class Cliente(models.Model):
 class Prestador(models.Model):
 
     data_cadastro = models.DateField('Ingressou em', auto_now_add=True)
-
+    telefone = models.CharField('Telefone', max_length=15)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     CPF = models.CharField('CPF', max_length=15, default='12345678')
     categorias = models.ManyToManyField(Categoria, blank=True)

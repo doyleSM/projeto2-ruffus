@@ -49,7 +49,9 @@ class PrestadorCadastroView(CreateView):
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
-        user = form.save()
+        cpf = form.cleaned_data['CPF']
+        telefone = form.cleaned_data['telefone']
+        user = form.save(cpf, telefone)
         login(self.request, user)
         return redirect(self.get_success_url())
 

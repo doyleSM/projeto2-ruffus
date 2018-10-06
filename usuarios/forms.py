@@ -24,14 +24,17 @@ class ClienteCadastroForm(UserCreationForm):
 
 
 class PrestadorCadastroForm(UserCreationForm):
-
+    CPF = forms.CharField()
+    telefone = forms.CharField()
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email',)
+        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email', 'CPF')
 
     @transaction.atomic
-    def save(self):
+    def save(self, cpf, telefone):
         user = super().save(commit=False)
+        user.prestador.CPF = cpf
+        user.prestador.telefone = telefone
         user.is_prestador = True
         user.is_active = False
         user.save()
