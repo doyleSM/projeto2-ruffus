@@ -33,12 +33,15 @@ class PrestadorCadastroForm(UserCreationForm):
     @transaction.atomic
     def save(self, cpf, telefone):
         user = super().save(commit=False)
-        user.prestador.CPF = cpf
-        user.prestador.telefone = telefone
+
         user.is_prestador = True
         user.is_active = False
         user.save()
         Prestador.objects.create(user=user)
+        user.prestador.CPF = cpf
+        user.prestador.telefone = telefone
+        user.prestador.save()
+
         return user
 
 

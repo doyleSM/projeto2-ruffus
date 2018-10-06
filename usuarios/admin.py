@@ -38,8 +38,8 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class PrestadorAdmin(admin.ModelAdmin):
-    fields = [('CPF', 'user'), 'categorias' ]
-    list_display = ['pk', 'usuario', 'nome', 'CPF', 'status', 'endereco']
+    fields = [('CPF', 'user', 'telefone'), 'categorias' ]
+    list_display = ['pk', 'usuario', 'nome', 'CPF', 'status', 'endereco', 'telefone']
     search_fields = ['nome']
 
     def nome(self, obj):
