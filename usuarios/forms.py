@@ -35,7 +35,7 @@ class PrestadorCadastroForm(UserCreationForm):
         user = super().save(commit=False)
 
         user.is_prestador = True
-        user.is_active = False
+        user.is_active = True
         user.save()
         Prestador.objects.create(user=user)
         user.prestador.CPF = cpf

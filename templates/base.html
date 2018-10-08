@@ -8,142 +8,77 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Ruffus - Sua casa, nosso lar</title>
+  <title>Ruffus</title>
     {% block script %}
     {% endblock %}
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- Bootstrap core CSS -->
   <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
-  <!--
 
-    -->
 <link href="{% static 'bootstrap/css/nav-bar.css' %}" rel="stylesheet">
   <script type="text/javascript" src="{% static 'bootstrap/js/jquery-3.3.1.min.js' %}"></script>
-
 </head>
 
 
-<body style="background-color: #ecf0f1;">
-
-<nav class="navbar navbar-expand-lg navbar-dark  " style="background-color: rgb(0,0,0) !important;">
-  <a class="navbar-brand" ></a>
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a  class="nav-link" href="{% url 'index' %}">Início</a>
-    </li>
-       <li class="nav-item dropdown ml-auto">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bars" aria-hidden="true"> Serviços</i></a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-         <a class="dropdown-item" href="{% url 'catalogo:lista_servicos' %}">Listar todos</a>
-                      {% for categoria in categorias %}
-                        <a class="dropdown-item" href="{% url 'catalogo:lista_por_categoria' categoria.slug %}">{{ categoria }}</a>
-                      {% endfor %}
-      </div>
-    </li>
-  </ul>
-  <ul class="navbar-nav ml-auto">
-
-
-      {% if not user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'usuarios:cadastro_cliente' %}"><i class="fa fa-user" aria-hidden="true"></i> Registrar</a>
-    </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'usuarios:login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i> Entrar</a>
-      </li>
-      </li>
-      {% else %}
-
-          <li class="nav-item dropdown mr-auto">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user" aria-hidden="true"> {{ user.username }}</i></a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'usuarios:cliente_conta' %}">Minha conta</a>
-          {% if user.is_cliente %}
-            <a class="dropdown-item" href="{% url 'usuarios:solicitacoes_cliente' %}">Solicitações</a>
-          s{% else %}
-              <a class="dropdown-item" href="{% url 'orcamentos:solicitacoes_abertas' %}">Solicitações</a>
-              <a class="dropdown-item" href="{% url 'orcamentos:orcamentos-dados' %}">Orçamentos dados</a>
-
-          {% endif %}
-              </div>
-    </li>
-
-
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'usuarios:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a>
-    </li>
-      {% endif %}
-  </ul>
-
-</nav>
-
-
-<!--
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mynav">
-  <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'index' %}">Início</a>
-            </li>
-            <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
-                  <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{% url 'catalogo:lista_servicos' %}">Listar todos</a>
-                      {% for categoria in categorias %}
-                        <a class="dropdown-item" href="{% url 'catalogo:lista_por_categoria' categoria.slug %}">{{ categoria }}</a>
-                      {% endfor %}
-                  </div>
+    <body style="background-color: #ecf0f1;">
+        <nav class="navbar navbar-expand-lg navbar-dark  " style="background-color: rgb(0,0,0) !important;">
+            <a class="navbar-brand" ></a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a  class="nav-link" href="{% url 'index' %}">Início</a>
                 </li>
-            {% if not user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'usuarios:cadastro_prestador' %}">Seja um profissional</a>
+                <li class="nav-item dropdown ml-auto">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bars" aria-hidden="true"> Serviços</i></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'catalogo:lista_servicos' %}">Listar todos</a>
+                        {% for categoria in categorias %}
+                            <a class="dropdown-item" href="{% url 'catalogo:lista_por_categoria' categoria.slug %}">{{ categoria }}</a>
+                        {% endfor %}
+                    </div>
                 </li>
-            {% endif %}
-        </ul>
-    </div>
-    <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
-        <ul class="navbar-nav mr-auto text-center">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'usuarios:cadastro_cliente' %}"><i class="fa fa-user" aria-hidden="true"></i> Registrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'usuarios:login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i> Entrar</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item dropdown mr-auto">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user" aria-hidden="true"> {{ user.username }}</i></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'usuarios:cliente_conta' %}">Minha conta</a>
+                            {% if user.is_cliente %}
+                                <a class="dropdown-item" href="{% url 'usuarios:solicitacoes_cliente' %}">Solicitações</a>
+                            {% else %}
+                                <a class="dropdown-item" href="{% url 'orcamentos:solicitacoes_abertas' %}">Solicitações</a>
+                                <a class="dropdown-item" href="{% url 'orcamentos:orcamentos-dados' %}">Orçamentos dados</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'usuarios:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% block messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissable" style="width: 100%; text-align: center;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>{{message}}</strong>
+                </div>
+            {% endfor %}
+        {% endblock messages %}
+        <div class="container">
+            {% block container %}
 
-            {% if user.is_authenticated %}
-            <li class="nav-item align-right">
-                <a class="nav-link" href="{% url 'usuarios:cliente_conta' %}">Minha conta</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'usuarios:logout' %}">Sair</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'usuarios:login' %}">Entrar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'usuarios:cadastro_cliente' %}">Cadastrar</a>
-            </li>
-            {% endif %}
-        </ul>
-    </div>
-</nav>
--->
- {% block messages %}
-          {% for message in messages %}
-          <div class="alert alert-{{message.tags}} alert-dismissable" style="width: 100%; text-align: center;">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <strong>{{message}}</strong>
-          </div>
-          {% endfor %}
-    {% endblock messages %}
-<div class="container">
-    {% block container %}
-    {% endblock %}
-</div>
-
-
-  
-  
-      <!-- Bootstrap core JavaScript
-      ================================================== -->
-      <!-- Placed at the end of the document so the pages load faster -->
-      <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
-
+            {% endblock %}
+        </div>
+              <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
     </body>
-  </html>
+</html>

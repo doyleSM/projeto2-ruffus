@@ -12,6 +12,7 @@ class Categoria(models.Model):
     slug = models.CharField('Identificador', max_length=50)
     data_criacao = models.DateTimeField('Criado em', auto_now_add=True)
     data_modificacao = models.DateTimeField('Modificado em', auto_now=True)
+    imagem = models.ImageField('Imagem', upload_to='categorias', blank=True, null=True)
 
     class Meta:
 
