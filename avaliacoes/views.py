@@ -41,16 +41,17 @@ class AvaliacaoView(CreateView):
         orcamento.solicitacao.avaliado = True
         orcamento.solicitacao.save()
 
-        return redirect(self.get_success_url(orcamento.solicitacao.orcamento_aceito.pk))
+        return self.get_success_url(orcamento.solicitacao.orcamento_aceito.prestador_id)
 
-    #def get_context_data(self, **kwargs):
-    #    context = super(SolicitacaoView, self).get_context_data(**kwargs)
-    #    context['servico'] = Servico.objects.get(slug=self.kwargs['slug'])
-    #    return context
+    def get_context_data(self, **kwargs):
+        context = super(AvaliacaoView, self).get_context_data(**kwargs)
+        orcamento = Orcamento.objects.get(pk=self.kwargs['orcamentopk'])
+        context['solicitacao'] = orcamento.solicitacao
+        return context
 
     def get_success_url(self, pk):
         messages.success(self.request, 'Avaliação feita com sucesso!')
-        return redirect('perfis:prefil_prestador',pk)
+        return redirect('perfis:prefil_prestador', pk)
 
 
 @method_decorator([prestador_required(login_url='usuarios:login')], name='dispatch')
@@ -83,13 +84,14 @@ class AvaliacaoPeloPrestador(CreateView):
         orcamento.solicitacao.save()
 
 
-        return redirect(self.get_success_url())
+        return self.get_success_url(orcamento.solicitacao.cliente_id)
 
-    #def get_context_data(self, **kwargs):
-    #    context = super(SolicitacaoView, self).get_context_data(**kwargs)
-    #    context['servico'] = Servico.objects.get(slug=self.kwargs['slug'])
-    #    return context
+    def get_context_data(self, **kwargs):
+        context = super(AvaliacaoPeloPrestador, self).get_context_data(**kwargs)
+        orcamento = Orcamento.objects.get(pk=self.kwargs['orcamentopk'])
+        context['solicitacao'] = orcamento.solicitacao
+        return context
 
-    def get_success_url(self):
+    def get_success_url(self, pk):
         messages.success(self.request, 'Avaliação feita com sucesso!')
-        return reverse('index')
+        return redirect('perfis:perfil_cliente', pk)

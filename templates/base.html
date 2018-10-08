@@ -59,8 +59,14 @@
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user" aria-hidden="true"> {{ user.username }}</i></a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'usuarios:cliente_conta' %}">Minha conta</a>
+          {% if user.is_cliente %}
             <a class="dropdown-item" href="{% url 'usuarios:solicitacoes_cliente' %}">Solicitações</a>
-      </div>
+          s{% else %}
+              <a class="dropdown-item" href="{% url 'orcamentos:solicitacoes_abertas' %}">Solicitações</a>
+              <a class="dropdown-item" href="{% url 'orcamentos:orcamentos-dados' %}">Orçamentos dados</a>
+
+          {% endif %}
+              </div>
     </li>
 
 

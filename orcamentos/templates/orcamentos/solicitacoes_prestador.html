@@ -5,8 +5,11 @@
 
     {% if not solicitacoes %}
         <span id="notifications" class="">
-            Não existem solicitações nas categorias em que você está cadastrado
+        <br>
+            Não existem solicitações nas categorias em que você está cadastrado <br><br>
         </span>
+        Você pode escolher em que categorias deseja prestar serviços clicando <a href="{% url 'usuarios:categorias_prestador' %}"> aqui</a>
+
         {% else %}
     {% for solicitacao in solicitacoes %}
             <div class="my-3 p-3 bg-white rounded box-shadow" style="margin-left: -50px; ">

@@ -19,8 +19,10 @@ from catalogo.views import lista_servicos
 from django.views.static import serve as serve_static
 from django.conf.urls.static import static
 from django.conf import settings
+from csite.views import home
 urlpatterns = [
-    path('', lista_servicos, name='index'),
+    path('', home, name='home'),
+    path('index/', lista_servicos, name='index'),
     path('admin/', admin.site.urls),
     path('catalogo/', include('catalogo.urls', namespace='catalogo')),
     path('usuarios/', include('usuarios.urls', namespace='usuarios')),

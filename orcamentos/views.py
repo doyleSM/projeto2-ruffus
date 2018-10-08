@@ -65,10 +65,10 @@ class OrcamentoView(CreateView):
 
         return redirect(self.get_success_url())
 
-    #def get_context_data(self, **kwargs):
-    #    context = super(SolicitacaoView, self).get_context_data(**kwargs)
-    #    context['servico'] = Servico.objects.get(slug=self.kwargs['slug'])
-    #    return context
+    def get_context_data(self, **kwargs):
+        context = super(OrcamentoView, self).get_context_data(**kwargs)
+        context['solicitacao'] = Solicitacao.objects.get(pk=self.kwargs['pk'])
+        return context
 
     def get_success_url(self):
         messages.success(self.request, 'Orçamento enviado com sucesso!')

@@ -1,27 +1,113 @@
 {% load static %}
 {% load widget_tweaks %}
   <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
-<div class="container">
-        <form class="form-horizontal" method='post' style="padding-top: 80px">
-            {% csrf_token %}
+<body style="background-color: #ecf0f1";>
+    <div class="container" >
 
-            <fieldset>
-                {% for field in form %}
-                    <div class="form-group {% if field.errors %} has-error{% endif %}">
-                        <label for="{{ field.auto_id }}" class="col-sm-6 sr-only"> {{field.label }}</label>
-                        <div class="">
-                            {% render_field field class="form-control" placeholder=field.label  %}
-                            {% for error in field.errors %}
-                                <div class="alert alert-danger">
-                                    <span class="help-block"> {{ error }}</span>
-                                </div>
-                            {% endfor %}
+    {% if user.is_cliente %}
+    <h3 style="margin-top: 15px; text-align: center"> Dados do serviço</h3>
+         <div class="my-3 p-3 bg-white rounded box-shadow" >
+                 <div class="media pt-3">
+                     <p class="media-body small lh-125  border-gray">
+                         <strong class="text-gray-dark ">Serviço: </strong>{{ solicitacao }}
+                         <br>
+                         <strong class="text-gray-dark">Prestador: </strong> <a href="{% url 'perfis:prefil_prestador' solicitacao.orcamento_aceito.prestador_id %}">{{ solicitacao.orcamento_aceito.prestador}}</a>
+                         <br>
+                         <strong class="text-gray-dark">Rua: </strong>{{ solicitacao.endereco }} - {{ solicitacao.endereco.CEP }}
+                         <strong class=""><br>Descrição feita pelo cliente: </strong><br>
+                            {{ solicitacao.descricao }}
+
+                        <strong class=""><br>Orcamento dado pelo prestador: </strong><br>
+                            {{ solicitacao.orcamento_aceito.descricao }}
+                 </div>
+                 <span class="badge badge-success">Valor: R$ {{ solicitacao.orcamento_aceito.valor }}</span>
+         </div>
+
+            <form class="form-horizontal" method='post'>
+                {% csrf_token %}
+
+                <fieldset>
+                    <strong><label type="text">Comentário</label></strong>
+                        <div class="form-group {% if form.comentario.errors %} has-error{% endif %}">
+                            <label for="{{ form.comentario.auto_id }}" class="col-sm-6 sr-only"> {{form.comentario.label }}</label>
+                            <div class="">
+                                {% render_field form.comentario class="form-control" placeholder='Deixe um comentário avaliando o serviço realizado pelo prestador' %}
+                                {% for error in form.comentario.errors %}
+                                    <div class="alert alert-danger">
+                                        <span class="help-block"> {{ error }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
-           </fieldset>
-            <button class="btn btn-success" style="float: right" type="submit">Avaliar</button>
-            <a href="{% url 'usuarios:solicitacoes_cliente' %}"><button class="btn btn-secondary "  style="float: right;margin-right: 5px   " type="button">Cancelar</button></a>
+                 <strong><label type="text">Que nota você acha que esse serviço merece?</label></strong>
+                        <div class="form-group {% if form.nota.errors %} has-error{% endif %}">
+                            <label for="{{ form.comentario.auto_id }}" class="col-sm-6 sr-only"> {{form.nota.label }}</label>
+                            <div class="">
+                                {% render_field form.nota class="form-control" %}
+                                {% for error in form.nota.errors %}
+                                    <div class="alert alert-danger">
+                                        <span class="help-block"> {{ error }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+               </fieldset>
+                <button class="btn btn-success" style="float: right" type="submit">Avaliar</button>
+                <a href="{% url 'usuarios:solicitacoes_cliente' %}"><button class="btn btn-secondary "  style="float: right;margin-right: 5px   " type="button">Cancelar</button></a>
 
-        </form>
-</div>
+            </form>
+        {% else %}
+            <h3 style="margin-top: 15px; text-align: center"> Dados do serviço</h3>
+         <div class="my-3 p-3 bg-white rounded box-shadow" >
+                 <div class="media pt-3">
+                     <p class="media-body small lh-125  border-gray">
+                         <strong class="text-gray-dark ">Serviço: </strong>{{ solicitacao }}
+                         <br>
+                         <strong class="text-gray-dark">Cliente: </strong> <a href="{% url 'perfis:perfil_cliente' solicitacao.cliente_id%}">{{ solicitacao.cliente}}</a>
+                         <br>
+                         <strong class="text-gray-dark">Rua: </strong>{{ solicitacao.endereco }} - {{ solicitacao.endereco.CEP }}
+                         <strong class=""><br>Descrição feita pelo cliente: </strong><br>
+                            {{ solicitacao.descricao }}
+
+                        <strong class=""><br>Orcamento dado pelo prestador: </strong><br>
+                            {{ solicitacao.orcamento_aceito.descricao }}
+                 </div>
+                 <span class="badge badge-success">Valor: R$ {{ solicitacao.orcamento_aceito.valor }}</span>
+         </div>
+
+            <form class="form-horizontal" method='post'>
+                {% csrf_token %}
+
+                <fieldset>
+                    <strong><label type="text">Comentário</label></strong>
+                        <div class="form-group {% if form.comentario.errors %} has-error{% endif %}">
+                            <label for="{{ form.comentario.auto_id }}" class="col-sm-6 sr-only"> {{form.comentario.label }}</label>
+                            <div class="">
+                                {% render_field form.comentario class="form-control" placeholder='Deixe um comentário avaliando o cliente' %}
+                                {% for error in form.comentario.errors %}
+                                    <div class="alert alert-danger">
+                                        <span class="help-block"> {{ error }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                 <strong><label type="text">Avalie o cliente</label></strong>
+                        <div class="form-group {% if form.nota.errors %} has-error{% endif %}">
+                            <label for="{{ form.comentario.auto_id }}" class="col-sm-6 sr-only"> {{form.nota.label }}</label>
+                            <div class="">
+                                {% render_field form.nota class="form-control" %}
+                                {% for error in form.nota.errors %}
+                                    <div class="alert alert-danger">
+                                        <span class="help-block"> {{ error }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+               </fieldset>
+                <button class="btn btn-success" style="float: right" type="submit">Avaliar</button>
+                <a href="{% url 'usuarios:solicitacoes_cliente' %}"><button class="btn btn-secondary "  style="float: right;margin-right: 5px   " type="button">Cancelar</button></a>
+
+            </form>
+        {% endif %}
+    </div>
+</body>

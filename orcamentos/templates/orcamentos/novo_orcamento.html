@@ -3,23 +3,48 @@
 {% load widget_tweaks %}
 
 {% block container %}
-    <form class="form-horizontal" method='post' style="padding-top: 80px">
+    <h3 style="margin-top: 15px; text-align: center"> Dados da solicitação</h3>
+     <div class="my-3 p-3 bg-white rounded box-shadow" >
+             <div class="media pt-3">
+                 <p class="media-body small lh-125  border-gray"">
+                     <strong class="text-gray-dark ">Serviço: </strong>{{ solicitacao }}
+                     <br>
+                     <strong class="text-gray-dark">Cliente: </strong> <a href="{% url 'perfis:perfil_cliente' solicitacao.cliente.pk %}">{{ solicitacao.cliente }}</a>
+                     <br>
+                     <strong class="text-gray-dark">Rua: </strong>{{ solicitacao.endereco }} - {{ solicitacao.endereco.CEP }}
+                     <strong class=""><br>Descrição feita pelo cliente: </strong><br>
+                        {{ solicitacao.descricao }}
+
+        </div>
+     </div>
+    <form class="form-horizontal" method='post' style="padding-top: -20px !important; padding-bottom: 30px">
         {% csrf_token %}
 
         <fieldset>
-            {% for field in form %}
-                <div class="form-group {% if field.errors %} has-error{% endif %}">
-                    <label for="{{ field.auto_id }}" class="col-sm-6 sr-only"> {{field.label }}</label>
+            <strong><label type="text">Proposta</label> </strong>
+                <div class="form-group {% if form.descricao.errors %} has-error{% endif %}">
+                    <label for="{{ form.descricao.auto_id }}" class="col-sm-6 sr-only"> {{form.descricao.label }}</label>
                     <div class="">
-                        {% render_field field class="form-control" placeholder=field.label  %}
-                        {% for error in field.errors %}
+                        {% render_field form.descricao class="form-control" placeholder='Descreva o serviço realizado e materiais utilizados caso necessário, procure deixar claro o que será feito e o porquê do valor pedido'  %}
+                        {% for error in form.descricao.errors %}
                             <div class="alert alert-danger">
                                 <span class="help-block"> {{ error }}</span>
                             </div>
                         {% endfor %}
                     </div>
                 </div>
-            {% endfor %}
+            <strong><label type="text">Qual o valor você cobrará pelo serviço?</label> </strong>
+            <div class="form-group {% if form.valor.errors %} has-error{% endif %}">
+                    <label for="{{ form.valor.auto_id }}" class="col-sm-6 sr-only"> {{form.valor.label }}</label>
+                    <div class="">
+                        {% render_field form.valor class="form-control" placeholder=form.valor.label  %}
+                        {% for error in form.valor.errors %}
+                            <div class="alert alert-danger">
+                                <span class="help-block"> {{ error }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
        </fieldset>
         <button class="btn btn-success align-right" type="submit">Enviar</button>
 

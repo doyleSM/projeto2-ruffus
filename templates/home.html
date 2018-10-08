@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block container %}
+    <div style="padding-bottom: 50px">
+        <div class="jumbotron" style="background-color: whitesmoke; margin-top: 20px">
+            <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center" style="margin-top: -60px">
+              <h1 class="display-4">Bem vindo ao Ruffus</h1>
+              <p class="lead">Somos uma plataforma de contratação de serviços que tem como objetivo fazer com que os usuários encontrem um trabalhador
+                  para resolver o seu problema com um preço justo.
+                  </p>
+            </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal" style="text-align: center">Benefícios</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-12 mb-12 align-left">
+                    <li> Maior facilidade em encontrar prestadores de serviços tornando esse processo mais ágil.</li>
+                    <li> Possibilitar aos clientes escolherem os serviços mais baratos/confiáveis, tendo em vista que diversos prestadores podem dar seu orçamento para determinado serviço.</li>
+                    <li> Aumentar a visibilidade dos prestadores, dando a possibilidade de aumento de renda.</li>
+                    <li>Aumentar a segurança na contratação de serviços, tendo em vista que os prestadores passarão por um rigoroso critério de seleção.</li>
+                    <li> Maior segurança no pagamento que é realizado pela plataforma.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal" style="text-align: center">Como funciona?</h4>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card-body">
+                        <p class="card-text"><h2 style="text-align: center">Clientes</h2>
+                        <p style="text-align: center">Você está precisando de um trabalhador para resolver um problema? é Preciso apenas fazer o cadastro, escolher a categoria
+                            e fazer uma solicitação de orçamento. Prestadores de serviços darão orçamentos e você pode escolher aquele que cabe melhor no seu bolso</p>
+                        <a href="{% url 'usuarios:cadastro_cliente' %}" class="btn btn-primary">Cadastro Cliente</a>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card-body">
+                        <p class="card-text"><h2 style="text-align: center">Prestadores</h2>
+                        <p style="text-align: center">É preciso fazer o cadastro e aguardar o contato.
+                            É importante sabe que verificamos antecedentes criminais e você não pode ter nenhum registro negativo.
+                            Também solicitamos ao menos três testemunhas de que você já realizou serviços antes.
+                        </p>
+                            <a href="{% url 'usuarios:cadastro_prestador' %}" class="btn btn-primary" style="float: right;">Cadastro Prestador</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
