@@ -133,12 +133,15 @@ class EnderecoView(CreateView):
     def form_valid(self, form):
         form.instance.usuario = self.request.user
         form.save()
-        return redirect(self.get_success_url())
+        return self.get_success_url()
 
     def get_success_url(self):
         messages.success(self.request, 'Endereco cadastrado com sucesso')
-        return reverse('usuarios:lista_enderecos')
-
+        redirecionamento = self.kwargs['redirecionamento']
+        if redirecionamento == 'None':
+            return redirect('usuarios:lista_enderecos')
+        else:
+            return redirect('orcamentos:solicitar_orcamento', redirecionamento)
 
 @method_decorator([login_required(login_url='usuarios:login')], name='dispatch')
 class EnderecoListView(ListView):

@@ -13,7 +13,7 @@ class SolicitacaoForm(ModelForm):
             'descricao': Textarea(attrs={'cols': 40, 'rows': 5, }),
         }
         labels = {
-            'descricao': _('Descreva o que você precisa'),
+            'descricao': _('Procure ser o mais específico possível.'),
 
         }
 

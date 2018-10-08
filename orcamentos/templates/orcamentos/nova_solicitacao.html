@@ -7,22 +7,33 @@
     <form class="form-horizontal" method='post' style="padding-top: 10px">
         {% csrf_token %}
         <fieldset>
-            {% for field in form %}
-                <div class="form-group {% if field.errors %} has-error{% endif %}">
-                    <label for="{{ field.auto_id }}" class="col-sm-6 sr-only"> {{field.label }}</label>
+        <strong><label type="text">Descreva o que você precisa</label></strong>
+                <div class="form-group {% if form.descricao.errors %} has-error{% endif %}">
+                    <label for="{{ form.descricao.auto_id }}" class="col-sm-6 sr-only"> {{form.descricao.label }}</label>
                     <div class="">
-                        {% render_field field class="form-control" placeholder=field.label  %}
-                        {% for error in field.errors %}
+                        {% render_field form.descricao class="form-control" placeholder=form.descricao.label  %}
+                        {% for error in form.descricao.errors %}
                             <div class="alert alert-danger">
                                 <span class="help-block"> {{ error }}</span>
                             </div>
                         {% endfor %}
                     </div>
                 </div>
-            {% endfor %}
+       <strong ><label type="text">Para qual endereço você deseja o serviço?</label></strong>
+                <div class="form-group {% if form.endereco.errors %} has-error{% endif %}">
+                    <label for="{{ form.endereco.auto_id }}" class="col-sm-6 sr-only"> {{form.endereco.label }}</label>
+                    <div class="">
+                        {% render_field form.endereco class="form-control" placeholder=form.endereco.label  %}
+                        {% for error in form.endereco.errors %}
+                            <div class="alert alert-danger">
+                                <span class="help-block"> {{ error }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
        </fieldset>
         <button class="btn btn-success align-right" type="submit">Solicitar</button>
-    <a style="float: right" href="{% url 'usuarios:cadastro_endereco' %}">
-        Novo Endereço</a>
+    <a style="float: right" href="{% url 'usuarios:cadastro_endereco' servico.slug %}">
+        Cadastrar novo endereço</a>
     </form>
 {% endblock %}
