@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from catalogo.views import lista_servicos
-
-
+from django.views.static import serve as serve_static
+from django.conf.urls.static import static
+from django.conf import settings
 urlpatterns = [
     path('', lista_servicos, name='index'),
     path('admin/', admin.site.urls),
@@ -27,3 +28,6 @@ urlpatterns = [
     path('avaliacoes/', include('avaliacoes.urls', namespace='avaliacoes')),
     path('perfis/', include('perfis.urls', namespace='perfis')),
 ]
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -12,8 +12,12 @@
                     <div class="card-content">
                         <div class="card-img">
                              <a href="{% url 'orcamentos:solicitar_orcamento' servico.slug %}">
-                            <img src="https://placeimg.com/380/230/any" alt="">
-                            </a>
+                            {% if servico.imagem %}
+                                <img src="{{ servico.imagem.url }}" alt="">
+                            {% else %}
+                                <img src="https://placeimg.com/380/230/any" alt="">
+                            {% endif %}
+                             </a>
                             <!--<span><h4>heading</h4></span> -->
                         </div>
                         <div class="card-desc">

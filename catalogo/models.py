@@ -10,7 +10,6 @@ class Categoria(models.Model):
 
     nome = models.CharField('Nome', max_length=50)
     slug = models.CharField('Identificador', max_length=50)
-
     data_criacao = models.DateTimeField('Criado em', auto_now_add=True)
     data_modificacao = models.DateTimeField('Modificado em', auto_now=True)
 

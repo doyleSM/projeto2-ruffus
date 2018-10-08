@@ -61,16 +61,16 @@
                     {% render_field form.password1 class="form-control" placeholder='Senha' %}
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
-                    {% if form.password2.errors %}
-                    <div class="alert alert-warning">
-                        {{ form.password2.errors }}
-                    </div>
-                    {% endif %}
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
                     {% render_field form.password2 class="form-control" placeholder='Confirmação de senha' %}
                 </div> <!-- form-group// -->
+                 {% if form.password2.errors %}
+                    <div class="alert alert-warning">
+                        {{ form.password2.errors }}
+                    </div>
+                    {% endif %}
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block"> Criar Conta  </button>
                 </div> <!-- form-group// -->
