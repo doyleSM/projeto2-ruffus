@@ -212,3 +212,29 @@ def cancelarOrcamento(request, orcamentopk):
         solicitacao.save()
         messages.success(request, 'orcamento cancelada com sucesso!')
         return redirect('orcamentos:orcamentos-dados')
+
+
+@prestador_required(login_url='usuarios:login')
+def confimarRealizacao(request, orcamentopk):
+    orcamento = Orcamento.objects.get(pk=orcamentopk)
+    try:
+        solicitacao = Solicitacao.objects.get(orcamento_aceito=orcamento)
+    except Solicitacao.DoesNotExist:
+        solicitacao = None
+
+    if orcamento.prestador != request.user.prestador:
+        messages.error(request, 'Você não tem permissão!')
+        return redirect('index')
+
+    if solicitacao is None:
+        messages.warning(request, 'Ocorreu um erro, tente novamente mais tarde')
+        return redirect('orcamentos:orcamentos-dados')
+
+    if solicitacao.status != 1:
+        messages.error(request, 'Não é possível confirmar a realização do serviço')
+        return redirect('orcamentos:orcamentos-dados')
+    else:
+        solicitacao.status = 4
+        solicitacao.save()
+        messages.success(request, 'solicitacao atulizada com sucesso!')
+        return redirect('orcamentos:orcamentos-dados')

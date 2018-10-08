@@ -27,8 +27,8 @@ class AvaliacaoView(CreateView):
             messages.error(self.request, 'Você nao pode avaliar essa solicitacao')
             return redirect('index')
 
-        if orcamento.solicitacao.status not in [3, 5]:
-            messages.error(self.request, 'Orcamento só pode ser avaliado se a solicitacao estiver concluida ou cancelada pelo prestador')
+        if orcamento.solicitacao.status not in [3, 4, 5]:
+            messages.error(self.request, 'Orcamento só pode ser avaliado se a solicitacao estiver aguardando pagamento, concluída ou cancelada pelo prestador')
             return redirect('usuarios:solicitacoes_cliente')
 
         if orcamento.solicitacao.avaliado:
@@ -68,8 +68,8 @@ class AvaliacaoPeloPrestador(CreateView):
             messages.error(self.request, 'Você nao pode avaliar esse usuário')
             return redirect('index')
 
-        if orcamento.solicitacao.status not in [2, 5]:
-            messages.error(self.request, 'Orcamento só pode ser avaliado se a solicitacao estiver concluida ou cancelada pelo cliente')
+        if orcamento.solicitacao.status not in [2, 4, 5]:
+            messages.error(self.request, 'Orcamento só pode ser avaliado se a solicitacao estiver aguardando pagamento, concluida ou cancelada pelo cliente')
             return redirect('index')
 
         if orcamento.solicitacao.prestador_avaliou:
