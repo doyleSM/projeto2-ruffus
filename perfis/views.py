@@ -16,7 +16,7 @@ class PerfilPrestador(ListView):
     #paginate_by = 5
     def get_context_data(self, **kwargs):
         context = super(PerfilPrestador, self).get_context_data(**kwargs)
-        context['completos'] = Solicitacao.objects.filter(status=5, orcamento_aceito__prestador=self.kwargs['pk']).count()
+        context['completos'] = Solicitacao.objects.filter(status=4, orcamento_aceito__prestador=self.kwargs['pk']).count()
         context['avaliacoes'] = Avaliacao.objects.filter(orcamento__prestador=self.kwargs['pk'], prestador_avaliou=False)
         avaliacoes = Avaliacao.objects.filter(orcamento__prestador=self.kwargs['pk'], prestador_avaliou=False)
         nota1 = avaliacoes.filter(nota=1).count()
@@ -73,7 +73,7 @@ class PerfilCliente(ListView):
     def get_context_data(self, **kwargs):
         context = super(PerfilCliente, self).get_context_data(**kwargs)
         cliente = Cliente.objects.get(pk=self.kwargs['pk'])
-        context['contratados'] = Solicitacao.objects.filter(status=5, cliente=cliente).count()
+        context['contratados'] = Solicitacao.objects.filter(status=4, cliente=cliente).count()
         context['avaliacoes'] = Avaliacao.objects.filter(orcamento__solicitacao__cliente=cliente, prestador_avaliou=True)
         avaliacoes = Avaliacao.objects.filter(orcamento__solicitacao__cliente=cliente, prestador_avaliou=True)
         nota1 = avaliacoes.filter(nota=1).count()

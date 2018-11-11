@@ -72,7 +72,7 @@ class OrcamentoView(CreateView):
 
     def get_success_url(self):
         messages.success(self.request, 'Orçamento enviado com sucesso!')
-        return reverse('orcamentos:solicitacoes_abertas')
+        return reverse('orcamentos:orcamentos-dados')
 
 
 @method_decorator([login_required(login_url='usuarios:login'), prestador_required(login_url='usuarios:login')], name='dispatch')

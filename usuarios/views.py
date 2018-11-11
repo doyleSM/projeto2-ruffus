@@ -52,7 +52,7 @@ class PrestadorCadastroView(CreateView):
         cpf = form.cleaned_data['CPF']
         telefone = form.cleaned_data['telefone']
         user = form.save(cpf, telefone)
-        login(self.request, user)
+        #login(self.request, user)
         return redirect(self.get_success_url())
 
     def get_success_url(self):
@@ -93,7 +93,10 @@ class Login(LoginView):
 
     def get_success_url(self):
         #messages.success(self.request, 'Usuário logado')
-        return reverse('index')
+        if self.request.user.is_prestador:
+            return reverse('usuarios:cliente_conta')
+        else:
+            return reverse('index')
 
 
 @method_decorator([login_required(login_url='usuarios:login')], name='dispatch')
