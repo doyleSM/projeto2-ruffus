@@ -26,7 +26,8 @@ class ClienteCadastroView(CreateView):
 
     def form_valid(self, form):
         cpf = form.cleaned_data['CPF']
-        user = form.save(cpf)
+        telefone = form.cleaned_data['telefone']
+        user = form.save(cpf, telefone)
         login(self.request, user)
         return redirect(self.get_success_url())
 

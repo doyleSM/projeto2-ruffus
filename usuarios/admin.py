@@ -3,8 +3,8 @@ from .models import Cliente, User, Endereco, Prestador
 
 
 class ClienteAdmin(admin.ModelAdmin):
-    fields = [('CPF', 'user'), ]
-    list_display = ['usuario', 'nome', 'CPF', 'status', 'endereco']
+    fields = [('CPF', 'user', 'telefone'), ]
+    list_display = ['usuario', 'nome', 'CPF', 'status', 'endereco', 'telefone']
     search_fields = ['nome',]
 
     def nome(self, obj):

@@ -35,12 +35,20 @@
                         <br>
                             <strong class=" text-gray-dark">Cliente: </strong> <a href="{% url 'perfis:perfil_cliente' orcamento.solicitacao.cliente.pk %}"> {{ orcamento.solicitacao.cliente }}</a>
                             {% if orcamento.solicitacao.orcamento_aceito.prestador == user.prestador %}
+                                {% if orcamento.solicitacao.status == 1 %}
+                                    <br>
+                                    <strong>Para ajustes de detalhes entre em contato com o cliente pelo
+                                     Telefone:</strong> {{ orcamento.solicitacao.cliente.telefone }}
+                                {% endif %}
+                            {% endif %}
+                            {% if orcamento.solicitacao.orcamento_aceito.prestador == user.prestador %}
                                 {% if orcamento.solicitacao.status == 5 or orcamento.solicitacao.status == 4 or orcamento.solicitacao.status == 2 %}
                                     {% if not orcamento.solicitacao.prestador_avaliou %}
                                         <a href="{% url 'avaliacoes:avaliar_cliente' orcamento.pk %}"> <button class="btn btn-sm btn-outline-secondary" style="float: right">avaliar</button></a>
                                     {% endif %}
                                 {% endif %}
                             {% endif %}
+
                             <strong class="d-block text-gray-dark">Descrição: </strong>{{ orcamento.solicitacao.descricao }}
                             <strong class="d-block text-gray-dark">Endereço: </strong>{{ orcamento.solicitacao.endereco }}
 

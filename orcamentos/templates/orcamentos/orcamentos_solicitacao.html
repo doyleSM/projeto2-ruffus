@@ -21,6 +21,7 @@
                             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                                 <strong class=" text-gray-dark">Prestador: </strong> <a href="{% url 'perfis:prefil_prestador' orcamento.prestador.pk %}"> {{ orcamento.prestador }} </a>
                                 <strong class="d-block text-gray-dark">Descrição: </strong>{{ orcamento.descricao }}
+                            {% if orcamento.solicitacao.orcamento_aceito == orcamento %}<strong class="d-block text-gray-dark">Qualquer dúvida, você pode entrar em contato com o prestador pelo telefone:</strong> {{ orcamento.prestador.telefone }} {% endif %}
                             </p>
                             <span class="badge  badge-warning">R$ {{ orcamento.valor }}</span>
                             {% if orcamento.solicitacao.orcamento_aceito == orcamento %}<span class="badge badge-success">Aceito</span>{% endif %}

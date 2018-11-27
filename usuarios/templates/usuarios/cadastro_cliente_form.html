@@ -52,7 +52,13 @@
                      </div>
                      {% render_field form.CPF class="form-control" placeholder='CPF' %}
                 </div> <!-- form-group// -->
-
+                    <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                         {{ form.telefone.errors }}
+                        <span class="input-group-text"> <i class="fas fa-mobile-alt"></i> </span>
+                     </div>
+                     {% render_field form.telefone class="form-control" placeholder='Telefone' %}
+                </div> <!-- form-group// -->
                 <div class="form-group input-group">
                      {{ form.password1.errors }}
                     <div class="input-group-prepend">

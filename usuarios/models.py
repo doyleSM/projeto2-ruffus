@@ -25,6 +25,7 @@ class Cliente(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     CPF = models.CharField('CPF', max_length=15)
+    telefone = models.CharField('Telefone', max_length=15, blank=True, null=True)
 
     def __str__(self):
         return self.user.get_full_name()

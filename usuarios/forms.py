@@ -7,18 +7,19 @@ from usuarios.models import Cliente, Endereco, User, Prestador
 
 class ClienteCadastroForm(UserCreationForm):
     CPF = forms.CharField()
-
+    telefone = forms.CharField()
     class Meta(UserCreationForm.Meta):
         model = User
         fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email', 'CPF')
 
     @transaction.atomic
-    def save(self, cpf):
+    def save(self, cpf, telefone):
         user = super().save(commit=False)
         user.is_cliente = True
         user.save()
         Cliente.objects.create(user=user)
         user.cliente.CPF = cpf
+        user.cliente.telefone = telefone
         user.cliente.save()
         return user
 

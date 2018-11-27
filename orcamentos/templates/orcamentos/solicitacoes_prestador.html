@@ -22,7 +22,7 @@
                     <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                         <strong class="text-gray-dark">Serviço: </strong> {{ solicitacao.servico }}
                         <strong class=""><br>Endereco: </strong>{{ solicitacao.endereco }}
-                        <strong class=""><br>Cliente: </strong>{{ solicitacao.cliente }}
+                        <strong class=""><br>Cliente: </strong><a href="{% url 'perfis:perfil_cliente' solicitacao.cliente.pk %}"> {{ solicitacao.cliente }}</a>
                         <strong class="d-block">Descrição:</strong>{{ solicitacao.descricao }}
                     </p>
                 </div>
