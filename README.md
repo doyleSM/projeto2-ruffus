@@ -11,7 +11,4 @@ Para mais informações visite a ([Wiki](https://github.com/doyleSM/projeto2-ruf
 Professor Dr. Célio Trois
 
 
-## Membros do grupo
-#### Alunos 
-Gabriel Doyle Balk([doyleSM](https://github.com/DoyleSM)) e Matuzalém Borges 
 
